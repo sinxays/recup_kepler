@@ -36,7 +36,7 @@ function GoCurl($token, $url, $page)
     $header[] = 'Content-Type:text/html;charset=utf-8';
 
     $dataArray = array(
-        "updateDateFrom" => "2021-07-18",
+        "updateDateFrom" => "2021-07-20",
         "state" => [
             "administrative_selling.state.invoiced_edit",
             "administrative_selling.state.valid",
@@ -66,7 +66,7 @@ function GoCurl($token, $url, $page)
             'administrative_selling.state.valid',
             'administrative_selling.state.invoiced',
         ),
-        "uniqueId" => "73532",
+        "uniqueId" => "61536",
         "page" => $page
     );
 

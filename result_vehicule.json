@@ -1,0 +1,622 @@
+[
+    {
+        "totalResult": "1",
+        "nbPageList": 1,
+        "createdAt": "2021-02-23T11:28:20+0100",
+        "updatedAt": "2021-06-24T23:03:33+0200",
+        "reference": "1ecs79djn",
+        "internalReference": "7361782",
+        "reportNumber": 7,
+        "country": "FR",
+        "state": "vehicle.state.sold",
+        "brand": {
+            "reference": "56f50a85b4678",
+            "name": "RENAULT"
+        },
+        "model": {
+            "reference": "5de598df4e9e9",
+            "name": "CAPTUR"
+        },
+        "version": {
+            "reference": "60527591a8f6b",
+            "name": "TCe 140 EDC FAP - 21 Intens",
+            "nationalityCode": "230985"
+        },
+        "typeVoVn": {
+            "reference": "5a4a859aa1bde",
+            "name": "VN NG"
+        },
+        "vehicleType": {
+            "reference": "587e9d16446ec",
+            "name": "VP"
+        },
+        "vin": "VF1RJB00967317029",
+        "licenseNumber": "FY-186-EY",
+        "energy": {
+            "reference": "5aea6d4834298",
+            "name": "Essence sans plomb"
+        },
+        "firstHand": false,
+        "bodywork": {
+            "reference": "5b0fc830605e7",
+            "name": "Tout-Terrain"
+        },
+        "gearbox": {
+            "reference": "5b0fc81050e0d",
+            "name": "Bo\u00eete automatique"
+        },
+        "color": {
+            "reference": "5cc80f65dc914",
+            "name": "GRIS HIGHLAND"
+        },
+        "pricePublicWithoutTax": "19083.33",
+        "pricePublic": "22900.00",
+        "priceSellerWithoutTax": "0.00",
+        "priceSeller": "0.00",
+        "priceSpecialWithoutTax": "18833.33",
+        "priceSpecial": "22600.00",
+        "estimateCost": "150.00",
+        "dateOfDistribution": "2021-03-30T00:00:00+0200",
+        "year": "2021",
+        "distanceTraveled": 10,
+        "distanceTraveledWarranty": true,
+        "gallery": [
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/6436ae3f7cf9e4ebffedbf433147e4dfbe7ad0c0.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007581_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007581_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007581_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007581",
+                "position": 0,
+                "reference": "9e8cd60f8d4147f11af6a7ff52c6fdb117c8fb38",
+                "updatedAt": "2021-04-23T10:58:59+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/cb68a144148d88ff4fab931a31582b237b393860.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007582_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007582_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007582_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007582",
+                "position": 1,
+                "reference": "64a2d1ecfaacd81ee369b35e4d4c3d39013ad079",
+                "updatedAt": "2021-04-23T10:58:59+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/4a7ea293ea6bb43506166645c03593a3be1043f3.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007583_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007583_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007583_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007583",
+                "position": 2,
+                "reference": "5c03a309ae9773a0405189ac9f6fc1c8af228275",
+                "updatedAt": "2021-04-23T10:58:59+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/21198593e8bc77a73d150c691719107a3f315c71.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007584_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007584_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007584_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007584",
+                "position": 3,
+                "reference": "871ab44074159c3c90200dd91278864519a4d7d4",
+                "updatedAt": "2021-04-23T10:59:07+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/14f7f2597d0aa9c7e393ab1fca041b8fd5ba6bb9.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007585_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007585_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007585_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007585",
+                "position": 4,
+                "reference": "92beb7aa9ec6da2f12f406f06a1dd821297bdc08",
+                "updatedAt": "2021-04-23T10:59:07+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/542e4096f68678f98e046d3ebe24d22ebf0bf801.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007587_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007587_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007587_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007587",
+                "position": 5,
+                "reference": "046cd528fe35d7e8ff10dcc6cdba594031dd3315",
+                "updatedAt": "2021-04-23T10:59:07+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/a4aff726742eb95a45bd7f790cf197fa8c6e1275.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007588_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007588_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007588_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007588",
+                "position": 6,
+                "reference": "5291a227c893962cc92b0b188bf88fb320aee841",
+                "updatedAt": "2021-04-23T10:59:14+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/20e9dc8b5e5f1fbcbac20c432de627951ed82fe3.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007589_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007589_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007589_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007589",
+                "position": 7,
+                "reference": "8ea061c75e1a3cd819a7091e5636118391c95fe8",
+                "updatedAt": "2021-04-23T10:59:15+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/7d5d94e97535f8b5e4999a3219961d014dc1e151.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007590_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007590_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007590_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007590",
+                "position": 8,
+                "reference": "a173040a0d741757b630a00b77959e13f0be43d5",
+                "updatedAt": "2021-04-23T10:59:15+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/653825fa811622223d812edcd1fa2a5c791966ab.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007591_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007591_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007591_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007591",
+                "position": 9,
+                "reference": "e0df57af433289c8bddbed4af75983b6823c8327",
+                "updatedAt": "2021-04-23T10:59:23+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/944fb78e5c8630dd6b3dadf928e83b791d8c2992.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007592_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007592_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007592_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007592",
+                "position": 10,
+                "reference": "dd8f31015045a3216eeab6f431312b98925b2654",
+                "updatedAt": "2021-04-23T10:59:24+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/87dcd00167ec0c7d6be9db7035e7f5a81c690a5b.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007593_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007593_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007593_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007593",
+                "position": 11,
+                "reference": "1e1e45d562065e147b073be4848468c0e91e5bae",
+                "updatedAt": "2021-04-23T10:59:24+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/dc603477f901d807cbe57c0a6e5cee4cddd906b2.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007594_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007594_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007594_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007594",
+                "position": 12,
+                "reference": "a92249f471924bec835e763010438e3558dce4a8",
+                "updatedAt": "2021-04-23T10:59:30+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/801344c057eecdef52db6040c272ec7ec4255d4f.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007595_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007595_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007595_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007595",
+                "position": 13,
+                "reference": "9179b9808d2b6c5d1faca2813bb58ed0c917fb96",
+                "updatedAt": "2021-04-23T10:59:32+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/93ea62b9e9bbd17c3989e36584d4c05bf732b7ab.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007596_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007596_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007596_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007596",
+                "position": 14,
+                "reference": "3d829ea6095d9277a08fb3e7cfda68a4c38751a8",
+                "updatedAt": "2021-04-23T10:59:32+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/705d19f05ff3892bb4b58dd33021e539591f990e.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007597_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007597_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007597_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007597",
+                "position": 15,
+                "reference": "dc833ba75704b84e01ef6296ac9ffe3f7f4070d3",
+                "updatedAt": "2021-04-23T10:59:37+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/c23c1c2fad6fdfe75c24e5ebcb3d9fc2e9fd49e4.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007598_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007598_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007598_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007598",
+                "position": 16,
+                "reference": "97dc539e7d41513518a28497e9c4e60d5e934b27",
+                "updatedAt": "2021-04-23T10:59:39+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/dded2128f97ff5343d256b69bd2dae0847ba5a8f.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007599_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007599_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007599_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007599",
+                "position": 17,
+                "reference": "6a7f81d77cc18401b0ec2467af4767f6fc5822b1",
+                "updatedAt": "2021-04-23T10:59:40+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/9dc3f31df11715767e17c141ca1dbc11e9713d3a.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007600_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007600_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007600_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007600",
+                "position": 18,
+                "reference": "5922106b2829b49518e409c27ec8db518d7e0164",
+                "updatedAt": "2021-04-23T10:59:45+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/679cbfae8901aeeef1cd948aa1ba6c6c502fc094.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007601_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007601_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007601_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007601",
+                "position": 19,
+                "reference": "85df82c6a8a7bd1815b06e1da9ef68dd36318401",
+                "updatedAt": "2021-04-23T10:59:46+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/c65dfd77e1cdb6415a159fec60ffe50b1b440acc.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007602_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007602_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007602_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007602",
+                "position": 20,
+                "reference": "4dc289a952fef4509e6f8a86e71ce3f4c6cabe03",
+                "updatedAt": "2021-04-23T10:59:48+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/2d5386dd230d0737847d33c4a6836d14df9418e1.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007604_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007604_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007604_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007604",
+                "position": 21,
+                "reference": "a13291e7cb6c22f9c9d1de22484ec8505bab280e",
+                "updatedAt": "2021-04-23T10:59:52+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/65ef4d34af976f4c389407547f20cc6dd8fb0320.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007605_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007605_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007605_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007605",
+                "position": 22,
+                "reference": "5c447e518304b84694a0c1fccc72ae278a71cd5a",
+                "updatedAt": "2021-04-23T10:59:53+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/ba88517804deb569ef0d69e923d52c3e0909fcd1.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007606_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007606_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007606_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007606",
+                "position": 23,
+                "reference": "a22daba032141b00c5de9223c18de3e1335483ee",
+                "updatedAt": "2021-04-23T10:59:54+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/2b6c2501ae1d4808dbb766cec8db873a534d9325.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007607_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007607_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007607_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007607",
+                "position": 24,
+                "reference": "1ab257d1595a27b9ad3c9fed3aa354b9f3ec1fff",
+                "updatedAt": "2021-04-23T10:59:59+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/2af0dbca25c97b6769f290e0d8e8f0347302e5c3.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007608_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007608_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007608_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007608",
+                "position": 25,
+                "reference": "a0fc34077e14fddadeb4665e0400f07c5aa0c475",
+                "updatedAt": "2021-04-23T11:00:01+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/843c2997c2927ed2e17b1a5ada244253eb1c0185.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007609_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007609_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007609_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007609",
+                "position": 26,
+                "reference": "0533caf130e10042ebc8549b76c196cc69195e59",
+                "updatedAt": "2021-04-23T11:00:02+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/bff26fbd9428a840bd2f4894bf55235c2ed55726.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007612_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007612_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007612_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007612",
+                "position": 27,
+                "reference": "d99bb5e8af1b5b8e7988c5214674866ce9343725",
+                "updatedAt": "2021-04-23T11:00:06+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/80c28cb7a896e960a8ffe548de61de2731c3b297.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007613_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007613_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007613_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007613",
+                "position": 28,
+                "reference": "c61236ec991d91aae779b4f98bc555fcf10b69c0",
+                "updatedAt": "2021-04-23T11:00:08+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/e6fd7975445206b6d5503cd61a69db01076d8369.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007614_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007614_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007614_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007614",
+                "position": 29,
+                "reference": "c0fa4abba2dc00b8fc7b054ee99660a341b8fc3d",
+                "updatedAt": "2021-04-23T11:00:09+0200",
+                "category": "Commerciales"
+            },
+            {
+                "photo": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/b8fe1d90411aa8b17df4611601307c9b5ed13b72.jpeg",
+                "large": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007615_admin_large.jpeg",
+                "big": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007615_admin_big.jpeg",
+                "thumb": "https:\/\/keplersoft.s3-eu-west-1.amazonaws.com\/0041\/08\/thumb_4007615_admin_small.jpeg",
+                "stamp": "https:\/\/www.kepler-soft.net\/medias\/watermark\/247\/4007615",
+                "position": 30,
+                "reference": "3cbeb902aadfb964cf1dde94de7d47bd38a7cbc6",
+                "updatedAt": "2021-04-23T11:00:13+0200",
+                "category": "Commerciales"
+            }
+        ],
+        "vo": 129140,
+        "gender": {
+            "reference": "5b0fc80f40323",
+            "name": "VP"
+        },
+        "taxHorsepower": 7,
+        "horsepower": 140,
+        "carEngine": 1333,
+        "doors": 5,
+        "seats": 5,
+        "isWorkshop": false,
+        "isRental": false,
+        "isRecoverableVat": false,
+        "warrantyType": "vehicle.warranty.type.manufacturer",
+        "warrantyDuration": 24,
+        "warrantyEndDate": "2023-03-30T00:00:00+0200",
+        "driveWheels": "Traction avant",
+        "maximumTorque": 260,
+        "height": 1576,
+        "length": 4227,
+        "width": 1797,
+        "wheelbase": 2639,
+        "carTrunkVolume": 422,
+        "carTrunkVolumeWithRearSeatDown": 1275,
+        "totalWeight": 3034,
+        "unloadedWeight": 1387,
+        "maximalPower": 103,
+        "purchaseZone": 0,
+        "purchaseTax": 0,
+        "supplier": {
+            "address": []
+        },
+        "lastExpertise": {
+            "elementList": []
+        },
+        "entryStockDate": "2021-02-22T00:00:00+0100",
+        "entryFleetDate": "2021-04-23T11:04:22+0200",
+        "origin": "EX VEHICULE LOCATION",
+        "fleet": "CVO ORLEANS SUD",
+        "location": "ORL\u00c9ANS SUD",
+        "groupFleet": "LES GRANDES OCCASIONS ORLEANS",
+        "valueOption": "150.00",
+        "valueNew": "28150.00",
+        "valueNewOption": "28300.00",
+        "equipmentStandard": [
+            {
+                "reference": "5a4a88a4c6191",
+                "name": " Radar de stationnement AR ",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f2081262d",
+                "name": "Alerte de survitesse avec reconnaissance des panneaux de signalisation",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f20819967",
+                "name": "Alerte distance de s\u00e9curit\u00e9 - Information dans tableau de bord",
+                "toDisplay": false
+            },
+            {
+                "reference": "5a4aa017e7201",
+                "name": " Allumage des phares automatique ",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f208506bf",
+                "name": "Assistant maintien de voie",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f2085dc37",
+                "name": "Carte Renault \"Mains libres\"",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f20877030",
+                "name": "Climatisation automatique",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f2087ef2a",
+                "name": "Commutation automatique des feux de route\/croisement",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f2089b44c",
+                "name": "EASY LINK avec \u00e9cran 7\" et navigation",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f208a22a0",
+                "name": "Eclairage AV et AR Full LED Pure Vision",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f208a994c",
+                "name": "Feux AR LED avec signature en forme de \"C\" et animation 3D",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f208b0dc8",
+                "name": "Feux de stop \u00e0 LED",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f208c8086",
+                "name": "Indicateur de changement de vitesse",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f208deee1",
+                "name": "L\u00e8ve-vitres \u00e9lectriques et impulsionnels",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f208ef12e",
+                "name": "Mode ECO",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f20902845",
+                "name": "Palettes au volant",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f209200f0",
+                "name": "R\u00e9gulateur limiteur de vitesse",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f20926a65",
+                "name": "Renault Multi-Sense (choix de modes de conduite)",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f2092ed34",
+                "name": "R\u00e9p\u00e9titeurs lat\u00e9raux de changement de direction",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f20936b6a",
+                "name": "R\u00e9troviseur int\u00e9rieur \u00e9lectrochrome",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f20940429",
+                "name": "R\u00e9troviseurs ext\u00e9rieur d\u00e9givrant, r\u00e9glables et rabattables \u00e9lectriquement",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f20959842",
+                "name": "Syst\u00e8me de d\u00e9tection de la pression des pneumatiques",
+                "toDisplay": false
+            },
+            {
+                "reference": "6061f20962037",
+                "name": "Syst\u00e8me ISOFIX (i-Size) aux places lat\u00e9rales AR et passager AV",
+                "toDisplay": false
+            },
+            {
+                "reference": "5a4a887161f74",
+                "name": " Capteur de Pluie ",
+                "toDisplay": false
+            },
+            {
+                "reference": "5a4a88a663144",
+                "name": " Radar de stationnement AV ",
+                "toDisplay": false
+            },
+            {
+                "reference": "5a4a886e00ea6",
+                "name": " Cam\u00e9ra de recul ",
+                "toDisplay": false
+            },
+            {
+                "reference": "5d2da5a5b5664",
+                "name": "Android Auto & Apple CarPlay",
+                "toDisplay": false
+            },
+            {
+                "reference": "5a4a9c31c2c52",
+                "name": " Syst\u00e8me de navigation GPS ",
+                "toDisplay": false
+            },
+            {
+                "reference": "5a4a879228776",
+                "name": " Kit mains-libres Bluetooth ",
+                "toDisplay": false
+            },
+            {
+                "reference": "5a4ae4f510633",
+                "name": " START & STOP ",
+                "toDisplay": false
+            }
+        ],
+        "equipmentOptional": [
+            {
+                "reference": "6061f207bed44",
+                "name": "Barres de toit",
+                "price": "150.00",
+                "toDisplay": false
+            }
+        ],
+        "equipmentNoPresent": [],
+        "company": {
+            "siretNumber": "32445680500070"
+        },
+        "servicePurchaseList": [],
+        "expertiseList": [],
+        "bookingFor": {
+            "address": []
+        },
+        "isRentalAvailable": false,
+        "isNotAvailableForSelling": false
+    }
+]

@@ -1,0 +1,161 @@
+{
+    "datas": [
+        {
+            "uniqueId": 88743,
+            "invoiceDate": "2021-03-12 15:32:05",
+            "destination": "VENTE MARCHAND",
+            "invoiceSellDate": "2021-03-12 15:32:05",
+            "seller": "GUILLAUME HONNERT ",
+            "number": "VO88743",
+            "type": "invoice.type.vehicle",
+            "group": "MASSOUTRE LOCATIONS",
+            "state": "invoice.state.valid",
+            "downloadLink": "https:\/\/www.kepler-soft.net\/api\/v3.0\/invoice\/88743\/document",
+            "sellPriceWithoutTax": "19417.20",
+            "sellPriceWithTax": "23300.64",
+            "balance": "0.00",
+            "items": [
+                {
+                    "type": "vehicle_selling",
+                    "reference": "4kpgyhh9",
+                    "sellPriceWithoutTaxWithoutDiscount": "19417.20",
+                    "priceDiscount": "0.00",
+                    "zone": 0,
+                    "tax": 0
+                }
+            ],
+            "customer": {
+                "discr": "professional",
+                "siret": "390443372000",
+                "corporateNameContact": "SARL UTILITAIRE SERVICE PARIS",
+                "addressAddress": "1 RUE DE L ILE DE FRANCE",
+                "addressPostalCode": "94460",
+                "addressCity": "VALENTON",
+                "addressCountry": "FR"
+            },
+            "owner": {
+                "discr": "professional",
+                "siret": "390443372000",
+                "corporateNameContact": "SARL UTILITAIRE SERVICE PARIS",
+                "addressAddress": "1 RUE DE L ILE DE FRANCE",
+                "addressPostalCode": "94460",
+                "addressCity": "VALENTON",
+                "addressCountry": "FR"
+            },
+            "payments": [
+                {
+                    "mode": "Virement",
+                    "receiveDate": "2021-03-11 00:00:00",
+                    "amount": "23300.64",
+                    "bank": "LCL"
+                }
+            ],
+            "notes": [],
+            "bundle": {
+                "number": "5267"
+            }
+        },
+        {
+            "uniqueId": 89341,
+            "invoiceDate": "2021-04-19 14:24:53",
+            "destination": "VENTE MARCHAND",
+            "invoiceSellDate": "2021-03-12 15:32:05",
+            "seller": "GUILLAUME HONNERT ",
+            "number": "VO89341",
+            "type": "invoice.type.vehicle",
+            "group": "MASSOUTRE LOCATIONS",
+            "state": "invoice.state.valid",
+            "downloadLink": "https:\/\/www.kepler-soft.net\/api\/v3.0\/invoice\/89341\/document",
+            "sellPriceWithoutTax": "17454.00",
+            "sellPriceWithTax": "20944.80",
+            "balance": "0.00",
+            "items": [
+                {
+                    "type": "vehicle_selling",
+                    "reference": "fjvcijt",
+                    "sellPriceWithoutTaxWithoutDiscount": "17454.00",
+                    "priceDiscount": "0.00",
+                    "zone": 0,
+                    "tax": 0
+                }
+            ],
+            "customer": {
+                "discr": "professional",
+                "siret": "390443372000",
+                "corporateNameContact": "SARL UTILITAIRE SERVICE PARIS",
+                "addressAddress": "1 RUE DE L ILE DE FRANCE",
+                "addressPostalCode": "94460",
+                "addressCity": "VALENTON",
+                "addressCountry": "FR"
+            },
+            "owner": {
+                "discr": "professional",
+                "siret": "390443372000",
+                "corporateNameContact": "SARL UTILITAIRE SERVICE PARIS",
+                "addressAddress": "1 RUE DE L ILE DE FRANCE",
+                "addressPostalCode": "94460",
+                "addressCity": "VALENTON",
+                "addressCountry": "FR"
+            },
+            "payments": [
+                {
+                    "mode": "Virement",
+                    "receiveDate": "2021-04-14 00:00:00",
+                    "amount": "20944.80",
+                    "bank": "LCL"
+                }
+            ],
+            "notes": [],
+            "bundle": {
+                "number": "5267"
+            }
+        },
+        {
+            "destination": "VENTE MARCHAND",
+            "seller": "GUILLAUME HONNERT ",
+            "number": "",
+            "type": "invoice.type.vehicle",
+            "group": "MASSOUTRE LOCATIONS",
+            "state": "invoice.state.processing",
+            "sellPriceWithoutTax": "18354.00",
+            "sellPriceWithTax": "22024.80",
+            "balance": "22024.80",
+            "items": [
+                {
+                    "type": "vehicle_selling",
+                    "reference": "1n1owhf2",
+                    "sellPriceWithoutTaxWithoutDiscount": "18354.00",
+                    "priceDiscount": "0.00",
+                    "zone": 0,
+                    "tax": 0
+                }
+            ],
+            "customer": {
+                "discr": "professional",
+                "siret": "390443372000",
+                "corporateNameContact": "SARL UTILITAIRE SERVICE PARIS",
+                "addressAddress": "1 RUE DE L ILE DE FRANCE",
+                "addressPostalCode": "94460",
+                "addressCity": "VALENTON",
+                "addressCountry": "FR"
+            },
+            "owner": {
+                "discr": "professional",
+                "siret": "390443372000",
+                "corporateNameContact": "SARL UTILITAIRE SERVICE PARIS",
+                "addressAddress": "1 RUE DE L ILE DE FRANCE",
+                "addressPostalCode": "94460",
+                "addressCity": "VALENTON",
+                "addressCountry": "FR"
+            },
+            "payments": [],
+            "notes": [],
+            "bundle": {
+                "number": "5267"
+            }
+        }
+    ],
+    "total": "3",
+    "currentPage": "1",
+    "perPage": "10"
+}

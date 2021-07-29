@@ -20,15 +20,19 @@
 
     /******************************************  CODE MAIN ******************************************/
 
+    $time_pre = time();
+    $time_token = time();
+
+    set_time_limit(0);
+
     // recup valeur token seulement
-    $url = "https://www.kepler-soft.net/api/v3.0/auth-token/";
-    $valeur_token = goCurlToken($url);
+    $url_token = "https://www.kepler-soft.net/api/v3.0/auth-token/";
+    $valeur_token = goCurlToken($url_token);
+    //$valeur_token_first = $valeur_token;
 
     sautdeligne();
 
     ?>
-
-
 
     <span style="color:red"> <?php echo $valeur_token; ?> </span>
 
@@ -65,117 +69,136 @@
     $datas_find = true;
     $datas_find_vehicule = true;
 
+    $state_array = array();
+
+    $array_datas[$i] = ["N° Bon Commande", "Immatriculation", "RS/Nom Acheteur", "Prix Vente HT", "Prix de vente TTC", "Vendeur Vente", "date du dernier BC", "Destination de sortie", "VIN"];
+
     while ($datas_find == true) {
 
+        /* $time_now = $time();
+        $time_now = $time_now - $time_token;
+
+        if($time_now > 1700){
+            $valeur_token = goCurlToken($url);
+            if($valeur_token !==  $valeur_token_first){
+                $time_token = time();
+            }
+        }
+        */
+
         //recupere la requete !!!!
+        $valeur_token = goCurlToken($url_token);
         $obj = GoCurl($valeur_token, $req_url_BC, $j);
+
+
         $obj_final = $obj->datas;
 
+
         if (!empty($obj_final)) {
-            
+
             sautdeligne();
             sautdeligne();
 
             /*****************    BOUCLE du tableau de données récupérés *****************/
 
-            $array_datas[$i] = ["N° Bon Commande", "Immatriculation", "RS/Nom Acheteur", "Prix Vente HT", "Prix de vente TTC", "Vendeur Vente", "date du dernier BC", "Destination de sortie", "VIN"];
 
             $i++;
+            //on boucle par rapport au nombre de bon de commande dans le tableau datas[]
             foreach ($obj_final as $keydatas => $keyvalue) {
-                //on boucle par rapport au nombre de bon de commande dans le tableau datas[]
 
+                echo ("____________________________________________________________________________________________________________________");
+                sautdeligne();
+
+                // on récupere le state du bon de commande 
                 if (isset($keyvalue->state)) {
                     $state = html_entity_decode($keyvalue->state);
                     echo "etaaat ==>" . $state;
                     sautdeligne();
-
-                    if ($state == "Facturé édité") {
-
-                        $j_factures = 1;
-
-                        while ($datas_find_vehicule == true) {
-
-                            //recupere la requete !!!!
-                            $obj_factures = GoCurl_Facture($valeur_token, $req_url_factures, $j_factures);
-                            $obj_final_factures = $obj_factures->datas;
+                }
 
 
-                            if (!empty($obj_final_factures)) {
+                if ($state == "Validé" || $state == "Facturé" || $state == "Facturé édité") {
 
-                                $array_datas[$i] = ["Date de la facture", "Immatriculation", "Kilométrage", "N° de la facture", "Prix de vente HT", "Acheteur", "Adresse du client", "Code postal du client", "Ville du client", "Pays du client", "Email du client", "Telephone du client", "Telephone portable du client", "Vendeur	Parc", "Destination	Source du client"];
+                    //get ID
+                    $bdc = $keyvalue->uniqueId;
 
-                                $i++;
+                    echo "bon de commande numéro :" . $bdc;
+                    sautdeligne();
 
-                                /*****************    BOUCLE du tableau de données récupérés *****************/
-                                foreach ($obj_final_factures as $keydatas => $keyvalue) {
-                                    //on boucle par rapport au nombre de bon de commande dans le tableau datas[]
+                    //get nom acheteur
+                    if (isset($keyvalue->owner->firstname)) {
+                        $nom_acheteur = $keyvalue->owner->firstname . " " . $keyvalue->owner->lastname;
+                    } else {
+                        $nom_acheteur = $keyvalue->owner->corporateName;
+                    }
 
-                                    //get date facture
-                                    $date_facture = $keyvalue->invoiceDate;
-                                    //get numéro de facture
-                                    $num_facture = $keyvalue->number;
-                                    // get prix de vente HT
-                                    $prixHT = $keyvalue->sellPriceWithoutTax;
-                                    //get nom acheteur
-                                    if (isset($keyvalue->owner->firstname)) {
-                                        $nom_acheteur = $keyvalue->owner->firstname . " " . $keyvalue->owner->lastname;
-                                    } else {
-                                        $nom_acheteur = $keyvalue->owner->corporateNameContact;
-                                    }
-                                    //adresse du client
-                                    $adresse_client = $keyvalue->customer->addressAddress;
-                                    // Code postal du client
-                                    $cp_client = $keyvalue->customer->addressPostalCode;
-                                    // ville du client
-                                    $ville_client = $keyvalue->customer->addressCity;
-                                    // pays du client
-                                    $pays_client = $keyvalue->customer->addressCountry;
-                                    // email du client
-                                    if (isset($keyvalue->customer->email) && !empty($keyvalue->customer->email)) {
-                                        $email_client = $keyvalue->customer->email;
-                                    } else {
-                                        $email_client = '';
-                                    }
-                                    //tel fixe du client
-                                    if (isset($keyvalue->customer->phoneNumber) && !empty($keyvalue->customer->phoneNumber)) {
-                                        $telfixe_client = $keyvalue->customer->phoneNumber;
-                                    } else {
-                                        $telfixe_client = '';
-                                    }
-                                    //tel mobile du client
-                                    if (isset($keyvalue->customer->cellPhoneNumber) && !empty($keyvalue->customer->cellPhoneNumber)) {
-                                        $telmobile_client = $keyvalue->customer->cellPhoneNumber;
-                                    } else {
-                                        $telmobile_client = '';
-                                    }
-                                    //get nom vendeur
-                                    $nom_vendeur = $keyvalue->seller;
-                                    $nom_vendeur = explode("<", $nom_vendeur);
-                                    $nom_vendeur = $nom_vendeur[0];
-                                    //get destination sortie
-                                    if (isset($keyvalue->destination) && !empty($keyvalue->destination)) {
-                                        $destination_sortie = $keyvalue->destination;
-                                    } else {
-                                        $destination_sortie  = '';
-                                    }
-                                    // source du client
-                                    if (isset($keyvalue->customer->knownFrom) && !empty($keyvalue->customer->knownFrom)) {
-                                        $source_client = $keyvalue->customer->knownFrom;
-                                    } else {
-                                        $source_client  = '';
-                                    }
-                                    if (isset($keyvalue->items)) {
-                                        foreach ($keyvalue->items as $key_item => $value_item) {
-                                            if ($value_item->type == 'vehicle_selling') {
+                    //get nom vendeur
+                    $nom_vendeur = $keyvalue->seller;
+                    $nom_vendeur = explode("<", $nom_vendeur);
+                    $nom_vendeur = $nom_vendeur[0];
 
-                                                $reference_item = $value_item->reference;
+                    //GET DATE BC
+                    $date_BC =  substr($keyvalue->date, 0, 10);
+                    $date_BC = str_replace("-", "/", $date_BC);
 
-                                                //  recup infos du véhicule
-                                                $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false);
-                                                if (empty($obj_result)) {
-                                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true);
+                    //get destination sortie
+                    if (empty($keyvalue->destination)) {
+                        $destination_sortie  = '';
+                    } else {
+                        $destination_sortie = $keyvalue->destination;
+                    }
+
+
+                    // si ya des items
+                    if (isset($keyvalue->items)) {
+                        $presta_Price = array();
+                        foreach ($keyvalue->items as $key_item => $value_item) {
+                            
+                            // si c'est une voiture et non un service ou prestation alors va chercher les infos du véhicule
+                            if ($value_item->type == 'vehicle_selling') {
+
+                                $reference_item = $value_item->reference;
+
+                                //  recup infos du véhicule
+                                $valeur_token = goCurlToken($url_token);
+                                $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false);
+                                if (empty($obj_result)) {
+                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true);
+                                }
+
+                                //array = OK ;  si object alors pas OK
+                                echo "le type est " . gettype($obj_result);
+                                sautdeligne();
+
+                                //si on obtient un object alors on remplit la ligne de erreur.
+                                if (gettype($obj_result) == 'object') {
+
+                                    $rien = 'erreur';
+
+                                    $array_datas[$i]['uniqueId'] = $bdc;
+                                    $array_datas[$i]['immatriculation'] = $rien;
+                                    $array_datas[$i]['name'] = $rien;
+                                    $array_datas[$i]['prixTotalHT'] = $rien;
+                                    $array_datas[$i]['prixTTC'] = $rien;
+                                    $array_datas[$i]['nomVendeur'] = $rien;
+                                    $array_datas[$i]['dateBC'] = $rien;
+                                    $array_datas[$i]['Destination_sortie'] = $rien;
+                                    $array_datas[$i]['VIN'] = $rien;
+                                } else {
+
+                                    if (!empty($obj_result)) {
+                                        $obj_vehicule = $obj_result[0];
+
+                                        if ($state == "Facturé édité") {
+
+                                            if ($obj_vehicule->state == "vehicle.state.sold_ar" or $obj_vehicule->state == "vehicle.state.sold") {
+
+                                                // get VIN
+                                                if (isset($obj_vehicule->vin) || !empty($obj_vehicule->vin)) {
+                                                    $vin = $obj_vehicule->vin;
+                                                } else {
+                                                    $vin = "";
                                                 }
-                                                $obj_vehicule = $obj_result[0];
 
                                                 //get IMMATRICULATION
                                                 if (empty($obj_vehicule->licenseNumber)) {
@@ -184,144 +207,78 @@
                                                     $immatriculation = $obj_vehicule->licenseNumber;
                                                 }
 
-                                                // get kilométrage
-                                                $kilometrage = $obj_vehicule->distanceTraveled;
+                                                $immatriculation = str_replace("-", "", $immatriculation);
 
-                                                //get de quel parc
-                                                $parc = $obj_vehicule->fleet;
-
-
-                                                $array_datas[$i]['date_facture'] = $date_facture;
+                                                // On place les valeurs dans les cellules
+                                                $array_datas[$i]['uniqueId'] = $bdc;
                                                 $array_datas[$i]['immatriculation'] = $immatriculation;
-                                                $array_datas[$i]['kilometrage'] = $kilometrage;
-                                                $array_datas[$i]['numerofacture'] = $num_facture;
-                                                $array_datas[$i]['prixHT'] = $prixHT;
-                                                $array_datas[$i]['acheteur'] = $nom_acheteur;
-                                                $array_datas[$i]['adresseclient'] = $adresse_client;
-                                                $array_datas[$i]['CPclient'] = $cp_client;
-                                                $array_datas[$i]['villeclient'] = $ville_client;
-                                                $array_datas[$i]['paysclient'] = $pays_client;
-                                                $array_datas[$i]['emailclient'] = $email_client;
-                                                $array_datas[$i]['telfixeclient'] = $telfixe_client;
-                                                $array_datas[$i]['telportableclient'] = $telmobile_client;
-                                                $array_datas[$i]['vendeur'] = $nom_vendeur;
-                                                $array_datas[$i]['parc'] = $parc;
-                                                $array_datas[$i]['destination'] = $destination_sortie;
-                                                $array_datas[$i]['source'] = $source_client;
+                                                $array_datas[$i]['name'] = $nom_acheteur;
+                                                $array_datas[$i]['prixTotalHT'] = $value_item->sellPriceWithoutTax;
+                                                $array_datas[$i]['prixTTC'] = $value_item->sellPriceWithTax;
+                                                $array_datas[$i]['nomVendeur'] = $nom_vendeur;
+                                                $array_datas[$i]['dateBC'] = $date_BC;
+                                                $array_datas[$i]['Destination_sortie'] = $destination_sortie;
+                                                $array_datas[$i]['VIN'] = $vin;
 
+
+                                                $nb_total_vehicules_selling++;
                                                 $nb_lignes++;
-                                                $i++;
                                             }
+                                        } else {
+
+                                            // get VIN
+                                            $vin = $obj_vehicule->vin;
+
+                                            //get IMMATRICULATION
+                                            if (empty($obj_vehicule->licenseNumber)) {
+                                                $immatriculation = 'N/C';
+                                            } else {
+                                                $immatriculation = $obj_vehicule->licenseNumber;
+                                            }
+
+                                            $immatriculation = str_replace("-", "", $immatriculation);
+
+                                            $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
+                                            $vehicule_seul_TTC = $value_item->sellPriceWithTax;
+
+                                            $nb_total_vehicules_selling++;
+                                            $nb_lignes++;
                                         }
                                     }
-
-                                    $nb_factures++;
                                 }
+                                $i++;
                             } else {
-                                $datas_find_vehicule = false;
+                                //si c'est pas vehicule selling
+                                $presta_Price_HT[$key_item] = $value_item->sellPriceWithoutTax;
+                                $presta_price_TTC[$key_item] = $value_item->sellPriceWithTax;
                             }
-                            $j++;
+
+                            // fin foreach //
                         }
+
+                        $total_presta_HT = array_sum($presta_Price_HT);
+                        $total_presta_TTC = array_sum($presta_price_TTC);
+
+                        //total vehicule + prestations 
+                        $total_HT = $vehicule_seul_HT + $total_presta_HT;
+                        $total_TTC = $vehicule_seul_TTC + $total_presta_TTC;
+
+                        // On place les valeurs dans les cellules
+                        $array_datas[$i]['uniqueId'] = $bdc;
+                        $array_datas[$i]['immatriculation'] = $immatriculation;
+                        $array_datas[$i]['name'] = $nom_acheteur;
+                        $array_datas[$i]['prixTotalHT'] = $total_HT;
+                        $array_datas[$i]['prixTTC'] = $total_TTC;
+                        $array_datas[$i]['nomVendeur'] = $nom_vendeur;
+                        $array_datas[$i]['dateBC'] = $date_BC;
+                        $array_datas[$i]['Destination_sortie'] = $destination_sortie;
+                        $array_datas[$i]['VIN'] = $vin;
                     }
-                }
 
-
-
-
-                //get ID
-                $bdc = $keyvalue->uniqueId;
-
-                //get nom acheteur
-                if (isset($keyvalue->owner->firstname)) {
-                    $nom_acheteur = $keyvalue->owner->firstname . " " . $keyvalue->owner->lastname;
+                    $nb_BC++;
                 } else {
-                    $nom_acheteur = $keyvalue->owner->corporateName;
+                    $state_array[] = $state;
                 }
-
-                //get nom vendeur
-                $nom_vendeur = $keyvalue->seller;
-                $nom_vendeur = explode("<", $nom_vendeur);
-                $nom_vendeur = $nom_vendeur[0];
-
-                //GET DATE BC
-                $date_BC =  substr($keyvalue->date, 0, 10);
-                $date_BC = str_replace("-", "/", $date_BC);
-
-                //get destination sortie
-                if (empty($keyvalue->destination)) {
-                    $destination_sortie  = '';
-                } else {
-                    $destination_sortie = $keyvalue->destination;
-                }
-
-                // $test1[] = $keyvalue->uniqueId;
-                // $test2[] = $keydatas;
-
-                if (isset($keyvalue->items)) {
-
-                    foreach ($keyvalue->items as $key_item => $value_item) {
-                        if ($value_item->type == 'vehicle_selling') {
-
-                            $reference_item = $value_item->reference;
-
-                            //  recup infos du véhicule
-                            $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false);
-                            if (empty($obj_result)) {
-                                $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true);
-                            }
-
-
-                            if (gettype($obj_result) == 'object') {
-
-                                $rien = 'object';
-
-                                $array_datas[$i]['uniqueId'] = $rien;
-                                $array_datas[$i]['immatriculation'] = $rien;
-                                $array_datas[$i]['name'] = $rien;
-                                $array_datas[$i]['prixTotalHT'] = $rien;
-                                $array_datas[$i]['prixTTC'] = $rien;
-                                $array_datas[$i]['nomVendeur'] = $rien;
-                                $array_datas[$i]['dateBC'] = $rien;
-                                $array_datas[$i]['Destination_sortie'] = $rien;
-                                $array_datas[$i]['VIN'] = $rien;
-                            } else {
-                                $obj_vehicule = $obj_result[0];
-
-
-                                // get VIN
-                                $vin = $obj_vehicule->vin;
-
-                                //get IMMATRICULATION
-                                if (empty($obj_vehicule->licenseNumber)) {
-                                    $immatriculation = 'N/C';
-                                } else {
-                                    $immatriculation = $obj_vehicule->licenseNumber;
-                                }
-
-                                $immatriculation = str_replace("-", "", $immatriculation);
-
-
-                                $array_datas[$i]['uniqueId'] = $bdc;
-                                $array_datas[$i]['immatriculation'] = $immatriculation;
-                                $array_datas[$i]['name'] = $nom_acheteur;
-                                $array_datas[$i]['prixTotalHT'] = $value_item->sellPriceWithoutTax;
-                                $array_datas[$i]['prixTTC'] = $value_item->sellPriceWithTax;
-                                $array_datas[$i]['nomVendeur'] = $nom_vendeur;
-                                $array_datas[$i]['dateBC'] = $date_BC;
-                                $array_datas[$i]['Destination_sortie'] = $destination_sortie;
-                                $array_datas[$i]['VIN'] = $vin;
-                            }
-
-
-                            // $test3[] = $value_item->reference;
-                            $nb_total_vehicules_selling++;
-                            $nb_lignes++;
-                            $i++;
-                        }
-                    }
-                }
-
-                $nb_BC++;
             }
         } else {
             $datas_find = false;
@@ -342,6 +299,12 @@
 
     echo 'nombre de lignes : ' . $nb_total_vehicules_selling;
 
+    sautdeligne();
+
+    print_r($state_array);
+
+
+    $time_post = time();
 
     sautdeligne();
     sautdeligne();
@@ -356,6 +319,9 @@
     $writer->writeSheet($array_datas);
     $writer->writeToFile('test_xlsx_BDC_1.xlsx');
 
+
+    $exec_time = $time_post - $time_pre;
+    echo "temps d'excécution ==> " . $exec_time . " secondes";
 
 
 
