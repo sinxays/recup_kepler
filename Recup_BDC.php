@@ -151,9 +151,13 @@
 
                     // si ya des items
                     if (isset($keyvalue->items)) {
-                        $presta_Price = array();
+
+                        $vehicule_seul_HT_test = array();
+                        $vehicule_seul_TTC_test = array();
+
+                        //on boucle dans les items
                         foreach ($keyvalue->items as $key_item => $value_item) {
-                            
+
                             // si c'est une voiture et non un service ou prestation alors va chercher les infos du véhicule
                             if ($value_item->type == 'vehicle_selling') {
 
@@ -221,6 +225,10 @@
                                                 $array_datas[$i]['VIN'] = $vin;
 
 
+                                                $vehicule_seul_HT_test[] = $value_item->sellPriceWithoutTax;
+                                                $vehicule_seul_TTC_test[] = $value_item->sellPriceWithTax;
+
+
                                                 $nb_total_vehicules_selling++;
                                                 $nb_lignes++;
                                             }
@@ -241,6 +249,9 @@
                                             $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
                                             $vehicule_seul_TTC = $value_item->sellPriceWithTax;
 
+                                            $vehicule_seul_HT_test[] = $value_item->sellPriceWithoutTax;
+                                            $vehicule_seul_TTC_test[] = $value_item->sellPriceWithTax;
+
                                             $nb_total_vehicules_selling++;
                                             $nb_lignes++;
                                         }
@@ -255,6 +266,9 @@
 
                             // fin foreach //
                         }
+
+                        var_dump($vehicule_seul_TTC_test);
+                        var_dump($vehicule_seul_HT_test);
 
                         $total_presta_HT = array_sum($presta_Price_HT);
                         $total_presta_TTC = array_sum($presta_price_TTC);

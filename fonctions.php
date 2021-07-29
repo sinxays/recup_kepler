@@ -66,7 +66,7 @@ function GoCurl($token, $url, $page)
             'administrative_selling.state.valid',
             'administrative_selling.state.invoiced',
         ),
-        "uniqueId" => "61536",
+        "uniqueId" => "71042",
         "page" => $page
     );
 
