@@ -16,6 +16,8 @@
 
     require('xlsxwriter.class.php');
 
+    include 'fonctions.php';
+
     /******************************************  CODE MAIN ******************************************/
 
     // recup valeur token seulement
@@ -266,12 +268,12 @@
         $header[] = 'Content-Type:text/html;charset=utf-8';
 
         // le ou les parametres de l'url
-        // $dataArray = array(
-        //     "state" => 'administrative_selling.state.valid',
-        //     "updateDateFrom" => "2021-03-29",
-        //     "count" => "100",
-        //     "page" => $page
-        // );
+        $dataArray = array(
+            "state" => 'administrative_selling.state.valid',
+            "updateDateFrom" => "2022-12-01",
+            "count" => "100",
+            "page" => $page
+        );
 
         // $dataArray = array(
         //     "state" => 'administrative_selling.state.already_sold',
@@ -281,10 +283,10 @@
         // );
 
         // choper un BC spécifique
-        $dataArray = array(
-            "orderFormNumber" => "70670",
-            "page" => $page
-        );
+        // $dataArray = array(
+        //     "orderFormNumber" => "70670",
+        //     "page" => $page
+        // );
 
 
         $data = http_build_query($dataArray);

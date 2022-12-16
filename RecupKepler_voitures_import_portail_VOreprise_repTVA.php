@@ -50,39 +50,41 @@
 
     sautdeligne();
 
-    // $obj = GoCurl($valeur_token, $req_url);
 
-    $reference = 'c8hl12m';
+    $obj = getVehicules_VOreprise_RepTVA($valeur_token, $req_url);
 
-    $obj = getvehiculeInfo($reference, $valeur_token, $req_url, false);
-
-    // $obj = get_vehicules_veille($valeur_token,$req_url,false);
+    // print_r($obj);
+    // die();
 
     sautdeligne();
     sautdeligne();
+
+    foreach ($obj as $vehicule) {
+        $date_creation_vh = $vehicule->createdAt;
+        echo $date_creation_vh;
+        sautdeligne();
+        // $type = $vehicule->typeVoVn->name;
+        // if ($type == 'VO REPRISE' || $type == 'REP TVA')
+        //     echo $vehicule->reference;
+        // sautdeligne();
+    }
+
     sautdeligne();
+    sautdeligne();
+    
+    die();
 
-
-    $array_uniqueId = array();
-    $array_AcheteurName = array();
-    $array_prixHT = array();
-    $array_prixTTC = array();
-    $array_vendeurName = array();
-    $array_dateBC = array();
-
-
-    $array_datas = array();
-
-    // echo '<pre>' . var_dump($obj) . '<pre>';
+    print_r($obj);
 
     $type_retour =  gettype($obj);
-
-    var_dump($type_retour);
 
 
     if ($type_retour == 'object') {
 
-        echo $obj->brand->reference;
+        sautdeligne();
+        sautdeligne();
+
+        echo $obj->reference;
         // echo gettype($obj_test);
 
 

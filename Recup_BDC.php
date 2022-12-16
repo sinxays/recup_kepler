@@ -1,10 +1,19 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Recup API KEPLER BDC</title>
+    <title>Recup API KEPLER BDC FINAL</title>
     <meta charset="utf-8" />
 </head>
+
+<?php
+
+//use App\Helpers\Text;
+//use App\Model\Post;
+//use App\Connection;
+//use App\URL;
+
+?>
+
 
 <body>
     <h2>Récupération du token</h2>
@@ -71,28 +80,28 @@
 
     $state_array = array();
 
-    $array_datas[$i] = ["N° Bon Commande", "Immatriculation", "RS/Nom Acheteur", "Prix Vente HT", "Prix de vente TTC", "Vendeur Vente", "date du dernier BC", "Destination de sortie", "VIN"];
+    $array_datas[$i] = ["N Bon Commande", "Immatriculation", "RS/Nom Acheteur", "Prix Vente HT", "Prix de vente TTC", "Vendeur Vente", "date du dernier BC", "Destination de sortie", "VIN"];
 
     while ($datas_find == true) {
 
         /* $time_now = $time();
-        $time_now = $time_now - $time_token;
+            $time_now = $time_now - $time_token;
 
-        if($time_now > 1700){
-            $valeur_token = goCurlToken($url);
-            if($valeur_token !==  $valeur_token_first){
-                $time_token = time();
+            if($time_now > 1700){
+                $valeur_token = goCurlToken($url);
+                if($valeur_token !==  $valeur_token_first){
+                    $time_token = time();
+                }
             }
-        }
-        */
+            */
 
         //recupere la requete !!!!
         $valeur_token = goCurlToken($url_token);
         $obj = GoCurl($valeur_token, $req_url_BC, $j);
+        //a ce niveau obj est un object
 
-
+        //on prends le tableau data dans obj et ce qui nous fait un array sur obj_final
         $obj_final = $obj->datas;
-
 
         if (!empty($obj_final)) {
 
@@ -100,9 +109,8 @@
             sautdeligne();
 
             /*****************    BOUCLE du tableau de données récupérés *****************/
-
-
             $i++;
+
             //on boucle par rapport au nombre de bon de commande dans le tableau datas[]
             foreach ($obj_final as $keydatas => $keyvalue) {
 
@@ -112,12 +120,19 @@
                 // on récupere le state du bon de commande 
                 if (isset($keyvalue->state)) {
                     $state = html_entity_decode($keyvalue->state);
+                    // $state = utf8_decode($keyvalue->state);
+
                     echo "etaaat ==>" . $state;
                     sautdeligne();
                 }
 
 
-                if ($state == "Validé" || $state == "Facturé" || $state == "Facturé édité") {
+                //$test = utf8_decode($state);
+
+                //echo $test.'<br/><br/>';
+
+                // si validé , Facturé ou Facturé édité
+                if ($state == "Validé" or $state == "Facturé" or $state == "Facturé édité") {
 
                     //get ID
                     $bdc = $keyvalue->uniqueId;
@@ -148,61 +163,114 @@
                         $destination_sortie = $keyvalue->destination;
                     }
 
+                    //déterminer si c'est une vente particvulier ou vente marchand ( particulier ou pro )
 
-                    // si ya des items
-                    if (isset($keyvalue->items)) {
 
-                        $vehicule_seul_HT_test = array();
-                        $vehicule_seul_TTC_test = array();
+                    echo "destination ==> $destination_sortie <br/><br/>";
 
-                        //on boucle dans les items
-                        foreach ($keyvalue->items as $key_item => $value_item) {
 
-                            // si c'est une voiture et non un service ou prestation alors va chercher les infos du véhicule
-                            if ($value_item->type == 'vehicle_selling') {
+                    //si c'est particulier 
+                    if ($destination_sortie == "VENTE PARTICULIER") {
 
-                                $reference_item = $value_item->reference;
+                        $erreur_vehicule_sorti = false;
 
-                                //  recup infos du véhicule
-                                $valeur_token = goCurlToken($url_token);
-                                $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false);
-                                if (empty($obj_result)) {
-                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true);
-                                }
+                        // echo "<span style='color:red'>" . $erreur_vehicule_sorti . "</span>";
 
-                                //array = OK ;  si object alors pas OK
-                                echo "le type est " . gettype($obj_result);
-                                sautdeligne();
 
-                                //si on obtient un object alors on remplit la ligne de erreur.
-                                if (gettype($obj_result) == 'object') {
 
-                                    $rien = 'erreur';
+                        //Si il y a des items
+                        if (isset($keyvalue->items)) {
 
-                                    $array_datas[$i]['uniqueId'] = $bdc;
-                                    $array_datas[$i]['immatriculation'] = $rien;
-                                    $array_datas[$i]['name'] = $rien;
-                                    $array_datas[$i]['prixTotalHT'] = $rien;
-                                    $array_datas[$i]['prixTTC'] = $rien;
-                                    $array_datas[$i]['nomVendeur'] = $rien;
-                                    $array_datas[$i]['dateBC'] = $rien;
-                                    $array_datas[$i]['Destination_sortie'] = $rien;
-                                    $array_datas[$i]['VIN'] = $rien;
-                                } else {
+                            $presta_Price_HT = array();
+                            $presta_price_TTC = array();
 
-                                    if (!empty($obj_result)) {
-                                        $obj_vehicule = $obj_result[0];
+                            //on boucle dans les items
+                            foreach ($keyvalue->items as $key_item => $value_item) {
+                                //si c'est un vehicule_selling
 
-                                        if ($state == "Facturé édité") {
+                                echo "_ _ _ _ _ _ _ _ _ _ _ _ <br/>";
+                                if ($value_item->type == 'vehicle_selling') {
 
-                                            if ($obj_vehicule->state == "vehicle.state.sold_ar" or $obj_vehicule->state == "vehicle.state.sold") {
+                                    $reference_item = $value_item->reference;
+
+                                    $obj_result = '';
+
+                                    //  recup infos du véhicule
+                                    $valeur_token = goCurlToken($url_token);
+                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false);
+                                    if (empty($obj_result)) {
+                                        $valeur_token = goCurlToken($url_token);
+                                        $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true);
+                                        echo "dispo à la vente ou pas ????<br/>";
+                                    } else {
+                                        echo "véhicule pas diponible à la vente<br/>";
+                                    }
+
+                                    echo "LE TYPE DE OBJ RESULT EST : " . gettype($obj_result) . "<br/><br/>";
+
+
+                                    // if (!empty($obj_result[0])) {
+                                    //     echo "Array OK | ";
+                                    // } else {
+                                    //     echo "Array pas OK | ";
+                                    //     var_dump($obj_result);
+                                    // }
+
+                                    $obj_vehicule = array();
+
+                                    $tmp_type = gettype($obj_result);
+                                    $type = utf8_decode($tmp_type);
+                                    sautdeligne();
+
+                                    //si on obtient un object alors on remplit la ligne de erreur.
+                                    // si c'est bien un array comme prévu
+                                    if ($type !== 'object' || $tmp_type !== 'object') {
+
+                                        // si le résultat n'est pas vide
+                                        if (!empty($obj_result[0])) {
+
+                                            $obj_vehicule = $obj_result[0];
+
+                                            if ($state == "Facturé édité") {
+                                                //On ne prend que les véhicules à l'état VEndu ou vendu AR
+                                                if ($obj_vehicule->state == "vehicle.state.sold_ar" or $obj_vehicule->state == "vehicle.state.sold") {
+
+                                                    // get VIN
+                                                    if (isset($obj_vehicule->vin) || !empty($obj_vehicule->vin)) {
+                                                        $vin = $obj_vehicule->vin;
+                                                    } else {
+                                                        $vin = "";
+                                                    }
+
+                                                    //get IMMATRICULATION
+                                                    if (empty($obj_vehicule->licenseNumber)) {
+                                                        $immatriculation = 'N/C';
+                                                    } else {
+                                                        $immatriculation = $obj_vehicule->licenseNumber;
+                                                    }
+
+                                                    $immatriculation = str_replace("-", "", $immatriculation);
+
+                                                    $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
+                                                    $vehicule_seul_TTC =  $value_item->sellPriceWithTax;
+
+                                                    $nb_total_vehicules_selling++;
+                                                }
+                                                // si facturé édité et que le véhicule n'est ni vendu ni vendu AR
+                                                else {
+                                                    $vin = "$obj_vehicule->state VIN";
+                                                    $immatriculation = "$obj_vehicule->state immatriculation";
+                                                    $vehicule_seul_HT = 0;
+                                                    $vehicule_seul_TTC = 0;
+
+                                                    $nb_total_vehicules_selling++;
+                                                }
+                                            }
+                                            //si pas facture éditée
+                                            else {
 
                                                 // get VIN
-                                                if (isset($obj_vehicule->vin) || !empty($obj_vehicule->vin)) {
-                                                    $vin = $obj_vehicule->vin;
-                                                } else {
-                                                    $vin = "";
-                                                }
+                                                $vin = $obj_vehicule->vin;
 
                                                 //get IMMATRICULATION
                                                 if (empty($obj_vehicule->licenseNumber)) {
@@ -210,91 +278,234 @@
                                                 } else {
                                                     $immatriculation = $obj_vehicule->licenseNumber;
                                                 }
-
+                                                //immatriculation bon format
                                                 $immatriculation = str_replace("-", "", $immatriculation);
-
-                                                // On place les valeurs dans les cellules
-                                                $array_datas[$i]['uniqueId'] = $bdc;
-                                                $array_datas[$i]['immatriculation'] = $immatriculation;
-                                                $array_datas[$i]['name'] = $nom_acheteur;
-                                                $array_datas[$i]['prixTotalHT'] = $value_item->sellPriceWithoutTax;
-                                                $array_datas[$i]['prixTTC'] = $value_item->sellPriceWithTax;
-                                                $array_datas[$i]['nomVendeur'] = $nom_vendeur;
-                                                $array_datas[$i]['dateBC'] = $date_BC;
-                                                $array_datas[$i]['Destination_sortie'] = $destination_sortie;
-                                                $array_datas[$i]['VIN'] = $vin;
-
-
-                                                $vehicule_seul_HT_test[] = $value_item->sellPriceWithoutTax;
-                                                $vehicule_seul_TTC_test[] = $value_item->sellPriceWithTax;
-
+                                                //prix du véhicule seul HT
+                                                $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
+                                                //prix du véhicule seul TTC
+                                                $vehicule_seul_TTC = $value_item->sellPriceWithTax;
 
                                                 $nb_total_vehicules_selling++;
-                                                $nb_lignes++;
                                             }
-                                        } else {
-
-                                            // get VIN
-                                            $vin = $obj_vehicule->vin;
-
-                                            //get IMMATRICULATION
-                                            if (empty($obj_vehicule->licenseNumber)) {
-                                                $immatriculation = 'N/C';
-                                            } else {
-                                                $immatriculation = $obj_vehicule->licenseNumber;
-                                            }
-
-                                            $immatriculation = str_replace("-", "", $immatriculation);
-
-                                            $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
-                                            $vehicule_seul_TTC = $value_item->sellPriceWithTax;
-
-                                            $vehicule_seul_HT_test[] = $value_item->sellPriceWithoutTax;
-                                            $vehicule_seul_TTC_test[] = $value_item->sellPriceWithTax;
-
-                                            $nb_total_vehicules_selling++;
-                                            $nb_lignes++;
+                                        }
+                                        //si le résultat est vide
+                                        else {
+                                            echo "véhicule sorti";
+                                            sautdeligne();
+                                            $erreur_vehicule_sorti = true;
                                         }
                                     }
                                 }
-                                $i++;
-                            } else {
-                                //si c'est pas vehicule selling
-                                $presta_Price_HT[$key_item] = $value_item->sellPriceWithoutTax;
-                                $presta_price_TTC[$key_item] = $value_item->sellPriceWithTax;
+                                //si c'est pas vehicule selling et donc service selling 
+                                else {
+                                    echo " - presta service : " . $value_item->name . "<br/>";
+                                    $presta_Price_HT[$key_item] = $value_item->sellPriceWithoutTax;
+                                    $presta_price_TTC[$key_item] = $value_item->sellPriceWithTax;
+                                }
                             }
 
-                            // fin foreach //
+
+
+                            // si il y a ou pas des services selling
+                            if (empty($presta_Price_HT)) {
+                                $total_presta_HT = 0;
+                            } else {
+                                $total_presta_HT = array_sum($presta_Price_HT);
+                            }
+                            if (empty($presta_price_TTC)) {
+                                $total_presta_TTC = 0;
+                            } else {
+                                $total_presta_TTC = array_sum($presta_price_TTC);
+                            }
+
+                            // si $erreur_vehicule_sorti == false
+                            if (!$erreur_vehicule_sorti) {
+
+                                $i++;
+
+                                echo "+1 ligne </br>";
+
+                                //total vehicule + prestations 
+                                $total_HT = $vehicule_seul_HT + $total_presta_HT;
+                                $total_TTC = $vehicule_seul_TTC + $total_presta_TTC;
+
+                                // On place les valeurs dans les cellules
+                                $array_datas[$i]['uniqueId'] = $bdc;
+                                $array_datas[$i]['immatriculation'] = $immatriculation;
+                                $array_datas[$i]['name'] = $nom_acheteur;
+                                $array_datas[$i]['prixTotalHT'] = $total_HT;
+                                $array_datas[$i]['prixTTC'] = $total_TTC;
+                                $array_datas[$i]['nomVendeur'] = $nom_vendeur;
+                                $array_datas[$i]['dateBC'] = $date_BC;
+                                $array_datas[$i]['Destination_sortie'] = $destination_sortie;
+                                $array_datas[$i]['VIN'] = $vin;
+
+                                var_dump($array_datas[$i]);
+
+                                $nb_lignes++;
+                            }
                         }
-
-                        var_dump($vehicule_seul_TTC_test);
-                        var_dump($vehicule_seul_HT_test);
-
-                        $total_presta_HT = array_sum($presta_Price_HT);
-                        $total_presta_TTC = array_sum($presta_price_TTC);
-
-                        //total vehicule + prestations 
-                        $total_HT = $vehicule_seul_HT + $total_presta_HT;
-                        $total_TTC = $vehicule_seul_TTC + $total_presta_TTC;
-
-                        // On place les valeurs dans les cellules
-                        $array_datas[$i]['uniqueId'] = $bdc;
-                        $array_datas[$i]['immatriculation'] = $immatriculation;
-                        $array_datas[$i]['name'] = $nom_acheteur;
-                        $array_datas[$i]['prixTotalHT'] = $total_HT;
-                        $array_datas[$i]['prixTTC'] = $total_TTC;
-                        $array_datas[$i]['nomVendeur'] = $nom_vendeur;
-                        $array_datas[$i]['dateBC'] = $date_BC;
-                        $array_datas[$i]['Destination_sortie'] = $destination_sortie;
-                        $array_datas[$i]['VIN'] = $vin;
+                        $nb_BC++;
                     }
 
-                    $nb_BC++;
-                } else {
+
+                    /****************************************** si c'est une VENTE A MARCHAND ou autre  ***********************************/
+                    // else {
+                    elseif ($destination_sortie == "VENTE MARCHAND" || $destination_sortie == "BUY BACK") {
+
+                        $erreur_vehicule_sorti = false;
+
+                        //Si il y a des items
+                        if (isset($keyvalue->items)) {
+                            //on boucle dans les items
+                            foreach ($keyvalue->items as $key_item => $value_item) {
+                                //on crée une variable qui contiendra le numéro de bdc initial
+                                echo "_ _ _ _ _ _ _ _ _ _ _ _ <br/>";
+
+                                $obj_vehicule = array();
+
+                                //si c'est un vehicule_selling
+                                if ($value_item->type == 'vehicle_selling') {
+
+                                    $reference_item = $value_item->reference;
+
+                                    $obj_result = '';
+
+                                    //  recup infos du véhicule
+                                    $valeur_token = goCurlToken($url_token);
+                                    //pas disponible à la vente
+                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false);
+                                    if (empty($obj_result)) {
+                                        $valeur_token = goCurlToken($url_token);
+                                        //disponible à la vente
+                                        $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true);
+                                        echo "véhicule diponible à la vente<br/>";
+                                    } else {
+                                        echo "véhicule pas diponible à la vente<br/>";
+                                    }
+
+
+                                    echo "LE TYPE DE OBJ RESULT EST : " . gettype($obj_result) . "<br/><br/>";
+
+
+                                    //array = OK ;  si object alors pas OK
+                                    $tmp_type = gettype($obj_result);
+                                    $type = utf8_decode($tmp_type);
+                                    sautdeligne();
+
+                                    sautdeligne();
+
+                                    //si on obtient un object alors on remplit la ligne de erreur.
+                                    if ($type !== 'object' || $tmp_type !== 'object') {
+
+                                        // si le résultat n'est pas vide
+                                        if (!empty($obj_result[0])) {
+
+                                            $obj_vehicule = $obj_result[0];
+
+                                            if ($state == "Facturé édité") {
+
+                                                //On ne prend que les véhicules à l'état VEndu ou vendu AR
+                                                if ($obj_vehicule->state == "vehicle.state.sold_ar" or $obj_vehicule->state == "vehicle.state.sold") {
+
+                                                    // get VIN
+                                                    if (isset($obj_vehicule->vin) || !empty($obj_vehicule->vin)) {
+                                                        $vin = $obj_vehicule->vin;
+                                                    } else {
+                                                        $vin = "";
+                                                    }
+
+                                                    //get IMMATRICULATION
+                                                    if (empty($obj_vehicule->licenseNumber)) {
+                                                        $immatriculation = 'N/C';
+                                                    } else {
+                                                        $immatriculation = $obj_vehicule->licenseNumber;
+                                                    }
+
+                                                    $immatriculation = str_replace("-", "", $immatriculation);
+
+                                                    $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
+                                                    $vehicule_seul_TTC =  $value_item->sellPriceWithTax;
+
+                                                    $nb_total_vehicules_selling++;
+                                                }
+                                                // si facturé édité et que le véhicule n'est ni vendu ni vendu AR
+                                                else {
+                                                    $vin = "$obj_vehicule->state VIN";
+                                                    $immatriculation = "$obj_vehicule->state immatriculation";
+                                                    $vehicule_seul_HT = "sorti prix HT";
+                                                    $vehicule_seul_TTC = "sorti prix TTC";
+
+                                                    $nb_total_vehicules_selling++;
+                                                }
+                                            }
+                                            //si pas facture éditée
+                                            else {
+
+                                                // get VIN
+                                                $vin = $obj_vehicule->vin;
+
+                                                //get IMMATRICULATION
+                                                if (empty($obj_vehicule->licenseNumber)) {
+                                                    $immatriculation = 'N/C';
+                                                } else {
+                                                    $immatriculation = $obj_vehicule->licenseNumber;
+                                                }
+                                                //immatriculation bon format
+                                                $immatriculation = str_replace("-", "", $immatriculation);
+                                                //prix du véhicule seul HT
+                                                $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
+                                                //prix du véhicule seul TTC
+                                                $vehicule_seul_TTC = $value_item->sellPriceWithTax;
+
+                                                $nb_total_vehicules_selling++;
+                                            }
+
+
+
+                                            //total vehicule 
+                                            $total_HT = $vehicule_seul_HT;
+                                            $total_TTC = $vehicule_seul_TTC;
+
+                                            $i++;
+
+                                            // On place les valeurs dans les cellules
+                                            $array_datas[$i]['uniqueId'] = $bdc;
+                                            $array_datas[$i]['immatriculation'] = $immatriculation;
+                                            $array_datas[$i]['name'] = $nom_acheteur;
+                                            $array_datas[$i]['prixTotalHT'] = $total_HT;
+                                            $array_datas[$i]['prixTTC'] = $total_TTC;
+                                            $array_datas[$i]['nomVendeur'] = $nom_vendeur;
+                                            $array_datas[$i]['dateBC'] = $date_BC;
+                                            $array_datas[$i]['Destination_sortie'] = $destination_sortie;
+                                            $array_datas[$i]['VIN'] = $vin;
+                                            echo "+1 ligne </br>";
+                                            $nb_lignes++;
+                                        } else {
+                                            echo "véhicule sorti";
+                                            sautdeligne();
+                                            $erreur_vehicule_sorti = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        $nb_BC++;
+                    }
+                    // si pas vente marchand NI vente PARTICULIER
+                    // else {
+                    //     echo "erreur ni vente particulier ni vente marchand<br/>";
+                    // }
+
+                }
+                //si c'est ni validé ni facturé ni facturé édité 
+                else {
                     $state_array[] = $state;
                 }
             }
-        } else {
+        }
+        //si il n'y a pas de données
+        else {
             $datas_find = false;
         }
         $j++;
@@ -302,6 +513,10 @@
 
 
     sautdeligne();
+
+    //on ne compte pas les bdc annulé ou autre 
+    $nbre_bdc_nonCompris = count($state_array);
+    $nb_BC = $nb_BC - $nbre_bdc_nonCompris;
 
     echo 'nombre de BC : ' . $nb_BC;
 
@@ -311,7 +526,7 @@
 
     sautdeligne();
 
-    echo 'nombre de lignes : ' . $nb_total_vehicules_selling;
+    echo 'nombre de véhicules vendus : ' . $nb_total_vehicules_selling;
 
     sautdeligne();
 
@@ -324,6 +539,10 @@
     sautdeligne();
 
 
+
+
+
+
     // print_r($array_datas);
 
 
@@ -331,11 +550,11 @@
 
     $writer = new XLSXWriter();
     $writer->writeSheet($array_datas);
-    $writer->writeToFile('test_xlsx_BDC_1.xlsx');
+    $writer->writeToFile('test_xlsx_BDC.xlsx');
 
 
     $exec_time = $time_post - $time_pre;
-    echo "temps d'excécution ==> " . $exec_time . " secondes";
+    echo "temps d'exécution ==> " . $exec_time . " secondes";
 
 
 
