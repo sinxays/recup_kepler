@@ -213,9 +213,6 @@
 
                                     echo "LE TYPE DE OBJ RESULT EST : " . gettype($obj_result) . "<br/><br/>";
 
-                                    var_dump($obj_result);
-                                    die();
-
 
                                     // if (!empty($obj_result[0])) {
                                     //     echo "Array OK | ";

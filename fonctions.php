@@ -175,6 +175,9 @@ function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_para
 
     $result = curl_exec($ch);
 
+    var_dump($result);
+    die();
+
     if (curl_error($ch)) {
         $result = curl_error($ch);
         print_r($result);
