@@ -50,73 +50,67 @@
 
     sautdeligne();
 
+    $date_filtre = date("Y-m-d", strtotime("-1 day"));
+    // $date_filtre = date("Y-m-d");
+    // $date_filtre = date("2023-01-14");
 
-    $obj = getVehicules_VOreprise_RepTVA($valeur_token, $req_url);
+    $data_find = true;
+    $page = 1;
+    $compteur_nb_vh_cree = 0;
 
-    // print_r($obj);
-    // die();
+    while ($data_find == true) {
 
-    sautdeligne();
-    sautdeligne();
 
-    foreach ($obj as $vehicule) {
-        $date_creation_vh = $vehicule->createdAt;
-        echo $date_creation_vh;
-        sautdeligne();
-        // $type = $vehicule->typeVoVn->name;
-        // if ($type == 'VO REPRISE' || $type == 'REP TVA')
-        //     echo $vehicule->reference;
-        // sautdeligne();
+        // $obj = getVehicules_VOreprise_RepTVA($valeur_token, $req_url, $date_filtre);
+        $obj = getVehicules_VOreprise_RepTVA($valeur_token, $req_url, $date_filtre, $page);
+
+        if (!empty($obj)) {
+
+            // var_dump($obj);
+            // die();
+
+            sautdeligne();
+            sautdeligne();
+
+            foreach ($obj as $vehicule) {
+                $date_creation_vh = $vehicule->createdAt;
+                $date_creation_formatted_tmp = explode("T", $date_creation_vh);
+                $date_creation_formatted = $date_creation_formatted_tmp[0];
+                $reference = $vehicule->reference;
+                $immatriculation = $vehicule->licenseNumber;
+
+                // echo "<br/> $date_creation_formatted || $immatriculation || $reference <br/>";
+
+                if ($date_creation_formatted == $date_filtre) {
+                    echo " véhicule crée le <span style='color:red'> $date_creation_formatted </span>";
+                    echo " || ";
+                    echo "référence est <span style='color:red'>$reference</span>";
+                    echo " || ";
+                    echo "immatriculation est <span style='color:red'>$immatriculation</span>";
+                    sautdeligne();
+                    $compteur_nb_vh_cree ++;
+                }
+                // $type = $vehicule->typeVoVn->name;
+                // if ($type == 'VO REPRISE' || $type == 'REP TVA')
+                //     echo $vehicule->reference;
+                // sautdeligne();
+            }
+        } else {
+            $data_find = false;
+        }
+        $page++;
     }
 
-    sautdeligne();
-    sautdeligne();
-    
-    die();
-
-    print_r($obj);
-
-    $type_retour =  gettype($obj);
+    echo "nombre de véhicule crée le $date_filtre : $compteur_nb_vh_cree";
 
 
-    if ($type_retour == 'object') {
 
-        sautdeligne();
-        sautdeligne();
-
-        echo $obj->reference;
-        // echo gettype($obj_test);
-
-
-        sautdeligne();
-        sautdeligne();
-
-        // echo 'toto';
-
-        sautdeligne();
-        sautdeligne();
-
-        // print_r($obj_test);
-
-        sautdeligne();
-        sautdeligne();
-
-        // echo 'toto2';
-
-        sautdeligne();
-        sautdeligne();
-
-        // echo $obj_test->vin;
-
-
-        //echo gettype($obj);
-
-
-        sautdeligne();
-        sautdeligne();
-    } else {
-        echo 'tata';
-    }
+    // if ($type_retour == 'object') {
+    //     sautdeligne();
+    //     echo $obj->reference;
+    // } else {
+    //     echo 'tata';
+    // }
 
 
 

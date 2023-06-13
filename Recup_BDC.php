@@ -97,7 +97,7 @@
 
         //recupere la requete !!!!
         $valeur_token = goCurlToken($url_token);
-        $obj = GoCurl($valeur_token, $req_url_BC, $j);
+        $obj = GoCurl_Recup_BDC($valeur_token, $req_url_BC, $j);
         //a ce niveau obj est un object
 
         //on prends le tableau data dans obj et ce qui nous fait un array sur obj_final
@@ -197,10 +197,12 @@
 
                                     //  recup infos du véhicule
                                     $valeur_token = goCurlToken($url_token);
-                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false);
+                                    $state = '';
+                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false,$state);
                                     if (empty($obj_result)) {
                                         $valeur_token = goCurlToken($url_token);
-                                        $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true);
+                                        $state = 'arrivage_or_parc';
+                                        $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true,$state);
                                         echo "dispo à la vente ou pas ????<br/>";
                                     } else {
                                         echo "véhicule pas diponible à la vente<br/>";

@@ -24,8 +24,8 @@ function goCurlToken($url)
 
 
 
-//FONCTIONS POUR RECUPERER LES DONNEES
-function GoCurl($token, $url, $page)
+//FONCTIONS POUR RECUPERER LES BDC DE LA VEILLE
+function GoCurl_Recup_BDC($token, $url, $page)
 {
 
     $ch = curl_init();
@@ -35,43 +35,50 @@ function GoCurl($token, $url, $page)
     $header[] = 'X-Auth-Token:' . $token;
     $header[] = 'Content-Type:text/html;charset=utf-8';
 
+    // $dataArray = array(
+    //     "updateDateFrom" => "2022-01-01",
+    //     "state" => [
+    //         "administrative_selling.state.invoiced_edit",
+    //         "administrative_selling.state.valid",
+    //         "administrative_selling.state.invoiced"
+    //     ],
+    //     "count" => 100,
+    //     "page" => $page
+    // );
+
+
+    // $dataArray2 = array(
+    //     'orderFormDateFrom' => '2022-12-01',
+    //     'state' => array(
+    //         'administrative_selling.state.invoiced_edit',
+    //         'administrative_selling.state.valid',
+    //         'administrative_selling.state.invoiced',
+    //     ),
+    //     'count' => 100,
+    //     'page' => $page
+    // );
+
     $dataArray = array(
-        "updateDateFrom" => "2021-01-01",
-        "state" => [
-            "administrative_selling.state.invoiced_edit",
-            "administrative_selling.state.valid",
-            "administrative_selling.state.invoiced"
-        ],
+        "state" => 'administrative_selling.state.valid',
+        "orderFormDateFrom" => "2023-04-24",
         "count" => 100,
         "page" => $page
     );
 
 
-    $dataArray2 = array(
-        'orderFormDateFrom' => '2022-12-01',
-        'state' => array(
-            'administrative_selling.state.invoiced_edit',
-            'administrative_selling.state.valid',
-            'administrative_selling.state.invoiced',
-        ),
-        'count' => 100,
-        'page' => $page
-    );
-
-
     // choper un BC spécifique
     $dataArray_unique = array(
-        'state' => array(
-            'administrative_selling.state.invoiced_edit',
-            'administrative_selling.state.valid',
-            'administrative_selling.state.invoiced',
-        ),
-        "uniqueId" => "73902",
+        // 'state' => array(
+        //     'administrative_selling.state.invoiced_edit',
+        //     'administrative_selling.state.valid',
+        //     'administrative_selling.state.invoiced',
+        // ),
+        "uniqueId" => "79735",
         "page" => $page
     );
 
 
-    $getURL = $url . '?' . http_build_query($dataArray2);
+    $getURL = $url . '?' . http_build_query($dataArray_unique);
 
     print_r($getURL);
 
@@ -95,9 +102,14 @@ function GoCurl($token, $url, $page)
     curl_close($ch);
 
     // echo gettype($result);
-    // echo $result;
+    echo $result;
+    die();
 
     $obj = json_decode($result);
+
+    // sautdeligne();
+    // echo gettype($obj);
+    // die();
 
 
 
@@ -117,7 +129,7 @@ function GoCurl($token, $url, $page)
 }
 
 // FONCTION INFOS DU VEHICULES
-function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_param)
+function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_param,$state)
 {
 
     $ch = curl_init();
@@ -127,12 +139,23 @@ function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_para
     $header[] = 'X-Auth-Token:' . $token;
     $header[] = 'Content-Type:text/html;charset=utf-8';
 
-    //le ou les parametres de l'url
-    $dataArray = array(
-        "reference" => $reference,
-        // "state" => 'vehicle.state.sold,vehicle.state.sold_ar',
-        // "isNotAvailableForSelling" => $isNotAvailable_param
-    );
+    if ($state == 'arrivage_or_parc') {
+
+        //le ou les parametres de l'url
+
+        // !!!! si le vh est vendu, vendu AR, en cours, sorti, sorti AR ou annulé alors il faudra mettre l'état obligatoirement si tu veux un retour 
+        $dataArray = array(
+            "reference" => $reference,
+            // "isNotAvailableForSelling" => $isNotAvailable_param
+        );
+    } else {
+
+        $dataArray = array(
+            "reference" => $reference,
+            "state" => 'vehicle.state.sold,vehicle.state.sold_ar,vehicle.state.pending,vehicle.state.out,vehicle.state.out_ar,vehicle.state.canceled',
+            // "isNotAvailableForSelling" => $isNotAvailable_param
+        );
+    }
 
 
     $data = http_build_query($dataArray);
@@ -159,6 +182,10 @@ function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_para
 
     curl_close($ch);
 
+    // echo gettype($result);
+    // sautdeligne();
+    // echo $result;
+
     // créer un array à partir du retour qui est un string
     $obj_vehicule = json_decode($result);
 
@@ -168,7 +195,7 @@ function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_para
 }
 
 
-function getVehicules_VOreprise_RepTVA($token, $url_vehicule)
+function getVehicules_VOreprise_RepTVA($token, $url_vehicule, $date_filtre, $page)
 {
     $ch = curl_init();
 
@@ -177,9 +204,12 @@ function getVehicules_VOreprise_RepTVA($token, $url_vehicule)
     $header[] = 'X-Auth-Token:' . $token;
     $header[] = 'Content-Type:text/html;charset=utf-8';
 
+
     //le ou les parametres de l'url
     $dataArray = array(
-        'dateUpdated Start' => '2022-12-01'
+        'dateUpdatedStart' =>  $date_filtre,
+        'count' => 100,
+        'page' => $page
     );
 
 

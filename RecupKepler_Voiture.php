@@ -52,9 +52,9 @@
 
     // $obj = GoCurl($valeur_token, $req_url);
 
-    $reference = 'c8hl12m';
+    $reference ='u41yasu';
 
-    $obj = getvehiculeInfo($reference, $valeur_token, $req_url, false);
+    $obj = getvehiculeInfo($reference, $valeur_token, $req_url, true);
 
     // $obj = get_vehicules_veille($valeur_token,$req_url,false);
 
@@ -82,8 +82,10 @@
 
     if ($type_retour == 'object') {
 
-        echo $obj->brand->reference;
+        // echo $obj->brand->reference;
         // echo gettype($obj_test);
+
+        var_dump($obj);
 
 
         sautdeligne();
