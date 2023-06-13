@@ -103,6 +103,9 @@
         //on prends le tableau data dans obj et ce qui nous fait un array sur obj_final
         $obj_final = $obj->datas;
 
+        // var_dump($obj_final);
+        // die();
+
         if (!empty($obj_final)) {
 
             sautdeligne();
@@ -210,6 +213,9 @@
 
                                     echo "LE TYPE DE OBJ RESULT EST : " . gettype($obj_result) . "<br/><br/>";
 
+                                    var_dump($obj_result);
+                                    die();
+
 
                                     // if (!empty($obj_result[0])) {
                                     //     echo "Array OK | ";
@@ -222,6 +228,7 @@
 
                                     $tmp_type = gettype($obj_result);
                                     $type = utf8_decode($tmp_type);
+
                                     sautdeligne();
 
                                     //si on obtient un object alors on remplit la ligne de erreur.

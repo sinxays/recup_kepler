@@ -60,7 +60,8 @@ function GoCurl_Recup_BDC($token, $url, $page)
 
     $dataArray = array(
         "state" => 'administrative_selling.state.valid',
-        "orderFormDateFrom" => "2023-04-24",
+        "orderFormDateFrom" => "2023-06-12",
+        "orderFormDateTo" => "2023-06-12",        
         "count" => 100,
         "page" => $page
     );
@@ -78,7 +79,7 @@ function GoCurl_Recup_BDC($token, $url, $page)
     );
 
 
-    $getURL = $url . '?' . http_build_query($dataArray_unique);
+    $getURL = $url . '?' . http_build_query($dataArray);
 
     print_r($getURL);
 
@@ -102,8 +103,8 @@ function GoCurl_Recup_BDC($token, $url, $page)
     curl_close($ch);
 
     // echo gettype($result);
-    echo $result;
-    die();
+    // echo $result;
+    // die();
 
     $obj = json_decode($result);
 
