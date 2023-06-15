@@ -25,7 +25,7 @@ function goCurlToken($url)
 
 
 //FONCTIONS POUR RECUPERER LES BDC DE LA VEILLE
-function GoCurl_Recup_BDC($token, $url, $page)
+function GoCurl_Recup_BDC($token, $url, $page, $num_bdc = '')
 {
 
     $ch = curl_init();
@@ -58,25 +58,28 @@ function GoCurl_Recup_BDC($token, $url, $page)
     //     'page' => $page
     // );
 
-    $dataArray = array(
-        "state" => 'administrative_selling.state.valid',
-        "orderFormDateFrom" => "2023-06-12",
-        "orderFormDateTo" => "2023-06-12",        
-        "count" => 100,
-        "page" => $page
-    );
-
+ 
 
     // choper un BC spécifique
-    $dataArray_unique = array(
-        // 'state' => array(
-        //     'administrative_selling.state.invoiced_edit',
-        //     'administrative_selling.state.valid',
-        //     'administrative_selling.state.invoiced',
-        // ),
-        "uniqueId" => "79735",
-        "page" => $page
-    );
+    if (isset($num_bdc) && $num_bdc != '') {
+        $dataArray = array(
+            // 'state' => array(
+            //     'administrative_selling.state.invoiced_edit',
+            //     'administrative_selling.state.valid',
+            //     'administrative_selling.state.invoiced',
+            // ),
+            "uniqueId" => $num_bdc,
+            "page" => $page
+        );
+    }else{
+        $dataArray = array(
+            "state" => 'administrative_selling.state.valid',
+            "orderFormDateFrom" => "2023-06-14",
+            "orderFormDateTo" => "2023-06-14",
+            "count" => 100,
+            "page" => $page
+        );
+    }
 
 
     $getURL = $url . '?' . http_build_query($dataArray);
@@ -122,15 +125,17 @@ function GoCurl_Recup_BDC($token, $url, $page)
 
     // echo '<pre>' . print_r($obj) . '</pre>';
 
-    echo '<pre> nombre total de BDC : ' . $obj->total . '</pre>';
-    echo '<pre> page actuelle :' . $obj->currentPage . '</pre>';
-    echo '<pre> BDC par page :' . $obj->perPage . '</pre>';
+    if (!isset($num_bdc) && $num_bdc == '') {
+        echo '<pre> nombre total de BDC : ' . $obj->total . '</pre>';
+        echo '<pre> page actuelle :' . $obj->currentPage . '</pre>';
+        echo '<pre> BDC par page :' . $obj->perPage . '</pre>';
+    }
 
     return $obj;
 }
 
 // FONCTION INFOS DU VEHICULES
-function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_param,$state)
+function getvehiculeInfo($reference, $token, $url_vehicule, $state)
 {
 
     $ch = curl_init();
@@ -141,20 +146,15 @@ function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_para
     $header[] = 'Content-Type:text/html;charset=utf-8';
 
     if ($state == 'arrivage_or_parc') {
-
-        //le ou les parametres de l'url
-
-        // !!!! si le vh est vendu, vendu AR, en cours, sorti, sorti AR ou annulé alors il faudra mettre l'état obligatoirement si tu veux un retour 
         $dataArray = array(
-            "reference" => $reference,
-            // "isNotAvailableForSelling" => $isNotAvailable_param
+            "reference" => $reference
         );
-    } else {
-
+    }
+    // !!!! si le vh est vendu, vendu AR, en cours, sorti, sorti AR ou annulé alors il faudra mettre l'état obligatoirement si tu veux un retour 
+    else {
         $dataArray = array(
             "reference" => $reference,
-            "state" => 'vehicle.state.sold,vehicle.state.sold_ar,vehicle.state.pending,vehicle.state.out,vehicle.state.out_ar,vehicle.state.canceled',
-            // "isNotAvailableForSelling" => $isNotAvailable_param
+            "state" => 'vehicle.state.sold,vehicle.state.sold_ar,vehicle.state.pending,vehicle.state.out,vehicle.state.out_ar,vehicle.state.canceled'
         );
     }
 
@@ -163,7 +163,7 @@ function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_para
 
     $getURL = $url_vehicule . '?' . $data;
 
-    print_r($getURL);
+    // print_r($getURL);
 
     sautdeligne();
 
@@ -175,8 +175,8 @@ function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_para
 
     $result = curl_exec($ch);
 
-    var_dump($result);
-    die();
+
+
 
     if (curl_error($ch)) {
         $result = curl_error($ch);
@@ -192,9 +192,11 @@ function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_para
 
     // créer un array à partir du retour qui est un string
     $obj_vehicule = json_decode($result);
+    // la on a un array
 
     $return = $obj_vehicule[0];
 
+    // on retourne un objet
     return $return;
 }
 

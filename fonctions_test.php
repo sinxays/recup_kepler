@@ -115,7 +115,7 @@ function GoCurl($token, $url, $page)
 }
 
 // FONCTION INFOS DU VEHICULES
-function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_param)
+function getvehiculeInfo_test($reference, $token, $url_vehicule, $isNotAvailable_param)
 {
 
     $ch = curl_init();

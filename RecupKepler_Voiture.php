@@ -34,8 +34,6 @@
 
     echo "<h2>Récupération des données véhicule(s)</h2>";
 
-    sautdeligne();
-
     // recup données
 
     $request_bon_de_commande = "v3.1/order-form/";
@@ -52,15 +50,12 @@
 
     // $obj = GoCurl($valeur_token, $req_url);
 
-    $reference ='u41yasu';
+    $reference ='8fnm2wsxzj';
+    $state = '';
 
-    $obj = getvehiculeInfo($reference, $valeur_token, $req_url, true);
+    $obj = getvehiculeInfo($reference, $valeur_token, $req_url,$state);
 
     // $obj = get_vehicules_veille($valeur_token,$req_url,false);
-
-    sautdeligne();
-    sautdeligne();
-    sautdeligne();
 
 
     $array_uniqueId = array();
@@ -106,7 +101,7 @@
         sautdeligne();
         sautdeligne();
 
-        // echo $obj_test->vin;
+        echo $obj->vin;
 
 
         //echo gettype($obj);

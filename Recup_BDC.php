@@ -29,6 +29,10 @@
 
     /******************************************  CODE MAIN ******************************************/
 
+    ini_set('xdebug.var_display_max_depth', 10);
+    ini_set('xdebug.var_display_max_children', 256);
+    ini_set('xdebug.var_display_max_data', 1024);
+
     $time_pre = time();
     $time_token = time();
 
@@ -95,15 +99,22 @@
             }
             */
 
+
+        $num_BDC = '';
+         // on reboucle pas si on met une valeur spécifique de bdc afin de récupérer qu'une seule page de l'API
+         if ($num_BDC !== '') {
+            $datas_find = false;
+        }
         //recupere la requete !!!!
         $valeur_token = goCurlToken($url_token);
-        $obj = GoCurl_Recup_BDC($valeur_token, $req_url_BC, $j);
+        $obj = GoCurl_Recup_BDC($valeur_token, $req_url_BC, $j, $num_BDC);
+       
         //a ce niveau obj est un object
 
-        //on prends le tableau data dans obj et ce qui nous fait un array sur obj_final
+        //on prends le tableau datas dans obj et ce qui nous fait un array sur obj_final
         $obj_final = $obj->datas;
 
-        // var_dump($obj_final);
+        var_dump($obj_final);
         // die();
 
         if (!empty($obj_final)) {
@@ -122,10 +133,10 @@
 
                 // on récupere le state du bon de commande 
                 if (isset($keyvalue->state)) {
-                    $state = html_entity_decode($keyvalue->state);
+                    $state_bdc = html_entity_decode($keyvalue->state);
                     // $state = utf8_decode($keyvalue->state);
 
-                    echo "etaaat ==>" . $state;
+                    echo "etaaat ==>" . $state_bdc;
                     sautdeligne();
                 }
 
@@ -135,7 +146,7 @@
                 //echo $test.'<br/><br/>';
 
                 // si validé , Facturé ou Facturé édité
-                if ($state == "Validé" or $state == "Facturé" or $state == "Facturé édité") {
+                if ($state_bdc == "Validé" or $state_bdc == "Facturé" or $state_bdc == "Facturé édité") {
 
                     //get ID
                     $bdc = $keyvalue->uniqueId;
@@ -179,8 +190,6 @@
 
                         // echo "<span style='color:red'>" . $erreur_vehicule_sorti . "</span>";
 
-
-
                         //Si il y a des items
                         if (isset($keyvalue->items)) {
 
@@ -191,7 +200,12 @@
                             foreach ($keyvalue->items as $key_item => $value_item) {
                                 //si c'est un vehicule_selling
 
-                                echo "_ _ _ _ _ _ _ _ _ _ _ _ <br/>";
+                                echo "_ _ _ _ _ _ _ _ _ _ _ _";
+                                sautdeligne();
+                                echo "item numéro : $key_item ==> $value_item->type";
+                                sautdeligne();
+
+
                                 if ($value_item->type == 'vehicle_selling') {
 
                                     $reference_item = $value_item->reference;
@@ -200,45 +214,42 @@
 
                                     //  recup infos du véhicule
                                     $valeur_token = goCurlToken($url_token);
-                                    $state = '';
-                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false,$state);
+                                    $state_vh = '';
+                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, $state_vh);
+                                    //si on a des resultats c'est que le vh est non dispo à la vente
                                     if (empty($obj_result)) {
                                         $valeur_token = goCurlToken($url_token);
-                                        $state = 'arrivage_or_parc';
-                                        $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true,$state);
-                                        echo "dispo à la vente ou pas ????<br/>";
+                                        $state_vh = 'arrivage_or_parc';
+                                        $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, $state_vh);
+                                        // echo "dispo à la vente ou pas ????";
+                                        sautdeligne();
                                     } else {
-                                        echo "véhicule pas diponible à la vente<br/>";
+                                        echo "véhicule pas disponible à la vente";
+                                        sautdeligne();
                                     }
 
                                     echo "LE TYPE DE OBJ RESULT EST : " . gettype($obj_result) . "<br/><br/>";
 
 
-                                    // if (!empty($obj_result[0])) {
-                                    //     echo "Array OK | ";
-                                    // } else {
-                                    //     echo "Array pas OK | ";
-                                    //     var_dump($obj_result);
-                                    // }
-
                                     $obj_vehicule = array();
 
-                                    $tmp_type = gettype($obj_result);
-                                    $type = utf8_decode($tmp_type);
+                                    $type = gettype($obj_result);
 
                                     sautdeligne();
 
-                                    //si on obtient un object alors on remplit la ligne de erreur.
-                                    // si c'est bien un array comme prévu
-                                    if ($type !== 'object' || $tmp_type !== 'object') {
+                                    // var_dump($type);
+                                    // die();
+
+                                    // si c'est bien un objet comme prévu
+                                    if ($type == 'object') {
 
                                         // si le résultat n'est pas vide
-                                        if (!empty($obj_result[0])) {
+                                        if (!empty($obj_result)) {
 
-                                            $obj_vehicule = $obj_result[0];
+                                            $obj_vehicule = $obj_result;
 
-                                            if ($state == "Facturé édité") {
-                                                //On ne prend que les véhicules à l'état VEndu ou vendu AR
+                                            if ($state_bdc == "Facturé édité") {
+                                                //On ne prend que les véhicules à l'état Vendu ou vendu AR
                                                 if ($obj_vehicule->state == "vehicle.state.sold_ar" or $obj_vehicule->state == "vehicle.state.sold") {
 
                                                     // get VIN
@@ -346,7 +357,7 @@
                                 $array_datas[$i]['Destination_sortie'] = $destination_sortie;
                                 $array_datas[$i]['VIN'] = $vin;
 
-                                var_dump($array_datas[$i]);
+                                // var_dump($array_datas[$i]);
 
                                 $nb_lignes++;
                             }
@@ -375,41 +386,37 @@
 
                                     $reference_item = $value_item->reference;
 
-                                    $obj_result = '';
-
                                     //  recup infos du véhicule
                                     $valeur_token = goCurlToken($url_token);
                                     //pas disponible à la vente
-                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false);
+                                    $state_vh = '';
+                                    $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, false, $state_vh);
                                     if (empty($obj_result)) {
                                         $valeur_token = goCurlToken($url_token);
                                         //disponible à la vente
-                                        $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true);
-                                        echo "véhicule diponible à la vente<br/>";
+                                        $state_vh = 'arrivage_or_parc';
+                                        $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, true, $state_vh);
+                                        // echo "véhicule diponible à la vente<br/>";
                                     } else {
-                                        echo "véhicule pas diponible à la vente<br/>";
+                                        echo "véhicule pas disponible à la vente<br/>";
                                     }
 
 
                                     echo "LE TYPE DE OBJ RESULT EST : " . gettype($obj_result) . "<br/><br/>";
 
-
                                     //array = OK ;  si object alors pas OK
-                                    $tmp_type = gettype($obj_result);
-                                    $type = utf8_decode($tmp_type);
+                                    $type = gettype($obj_result);
                                     sautdeligne();
 
-                                    sautdeligne();
-
-                                    //si on obtient un object alors on remplit la ligne de erreur.
-                                    if ($type !== 'object' || $tmp_type !== 'object') {
+                                    //si on obtient un object.
+                                    if ($type == 'object') {
 
                                         // si le résultat n'est pas vide
-                                        if (!empty($obj_result[0])) {
+                                        if (!empty($obj_result)) {
 
-                                            $obj_vehicule = $obj_result[0];
+                                            $obj_vehicule = $obj_result;
 
-                                            if ($state == "Facturé édité") {
+                                            if ($state_bdc == "Facturé édité") {
 
                                                 //On ne prend que les véhicules à l'état VEndu ou vendu AR
                                                 if ($obj_vehicule->state == "vehicle.state.sold_ar" or $obj_vehicule->state == "vehicle.state.sold") {
@@ -467,8 +474,6 @@
                                                 $nb_total_vehicules_selling++;
                                             }
 
-
-
                                             //total vehicule 
                                             $total_HT = $vehicule_seul_HT;
                                             $total_TTC = $vehicule_seul_TTC;
@@ -506,7 +511,7 @@
                 }
                 //si c'est ni validé ni facturé ni facturé édité 
                 else {
-                    $state_array[] = $state;
+                    $state_array[] = $state_bdc;
                 }
             }
         }

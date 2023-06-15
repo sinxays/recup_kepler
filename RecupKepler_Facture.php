@@ -341,66 +341,6 @@
 
 
 
-    function getvehiculeInfo($reference, $token, $url_vehicule, $isNotAvailable_param)
-    {
-
-        $ch = curl_init();
-
-        // le token
-        $header = array();
-        $header[] = 'X-Auth-Token:' . $token;
-        $header[] = 'Content-Type:text/html;charset=utf-8';
-
-        //le ou les parametres de l'url
-        if ($isNotAvailable_param == true) {
-            $dataArray = array(
-                "reference" => $reference,
-                "state" => 'vehicle.state.sold,vehicle.state.sold_ar,vehicle.state.out,vehicle.state.out_ar',
-                "isNotAvailableForSelling" => true
-            );
-        } else {
-            $dataArray = array(
-                "reference" => $reference,
-                "state" => 'vehicle.state.sold,vehicle.state.sold_ar,vehicle.state.out,vehicle.state.out_ar',
-                "isNotAvailableForSelling" => false
-            );
-        }
-
-        $data = http_build_query($dataArray);
-
-        $getURL = $url_vehicule . '?' . $data;
-
-        print_r($getURL);
-
-        sautdeligne();
-
-        curl_setopt($ch, CURLOPT_URL, $getURL);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-
-        $result = curl_exec($ch);
-
-        if (curl_error($ch)) {
-            $result = curl_error($ch);
-            print_r($result);
-            echo "<br/> erreur";
-        }
-
-        curl_close($ch);
-
-        echo "<pre>";
-        print_r($result);
-        echo "</pre>";
-
-        $obj_vehicule = json_decode($result);
-
-        return $obj_vehicule;
-    }
-
-
-
 
     // json to CSV
     function array2csv($data, $delimiter = ';', $enclosure = '"', $escape_char = "\\")
