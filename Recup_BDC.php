@@ -101,18 +101,30 @@
 
 
         $num_BDC = '';
-         // on reboucle pas si on met une valeur spécifique de bdc afin de récupérer qu'une seule page de l'API
-         if ($num_BDC !== '') {
+        $date_bdc = '';
+
+        // date d'hier
+        // $date_bdc = date('Y-m-d', strtotime("-1 day"));
+        //date spécifique 
+        // $date_bdc = "2023-09-12";
+
+
+        // on reboucle pas si on met une valeur spécifique de bdc afin de récupérer qu'une seule page de l'API
+        if ($num_BDC !== '') {
             $datas_find = false;
         }
         //recupere la requete !!!!
         $valeur_token = goCurlToken($url_token);
-        $obj = GoCurl_Recup_BDC($valeur_token, $req_url_BC, $j, $num_BDC);
-       
+        $obj = GoCurl_Recup_BDC($valeur_token, $req_url_BC, $j, $num_BDC, $date_bdc);
+
         //a ce niveau obj est un object
 
         //on prends le tableau datas dans obj et ce qui nous fait un array sur obj_final
-        $obj_final = $obj->datas;
+        if (!empty($obj)) {
+            $obj_final = $obj->datas;
+        } else {
+            $obj_final = '';
+        }
 
         var_dump($obj_final);
         // die();
@@ -268,7 +280,7 @@
 
                                                     $immatriculation = str_replace("-", "", $immatriculation);
 
-                                                    $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
+                                                    $vehicule_seul_HT = $value_item->sellPriceWithoutTaxWithoutDiscount;
                                                     $vehicule_seul_TTC =  $value_item->sellPriceWithTax;
 
                                                     $nb_total_vehicules_selling++;
@@ -298,7 +310,7 @@
                                                 //immatriculation bon format
                                                 $immatriculation = str_replace("-", "", $immatriculation);
                                                 //prix du véhicule seul HT
-                                                $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
+                                                $vehicule_seul_HT = $value_item->sellPriceWithoutTaxWithoutDiscount;
                                                 //prix du véhicule seul TTC
                                                 $vehicule_seul_TTC = $value_item->sellPriceWithTax;
 
@@ -343,8 +355,10 @@
                                 echo "+1 ligne </br>";
 
                                 //total vehicule + prestations 
-                                $total_HT = $vehicule_seul_HT + $total_presta_HT;
-                                $total_TTC = $vehicule_seul_TTC + $total_presta_TTC;
+                                // $total_HT = $vehicule_seul_HT + $total_presta_HT;
+                                // $total_TTC = $vehicule_seul_TTC + $total_presta_TTC;
+                                $total_HT = $vehicule_seul_HT ;
+                                $total_TTC = $vehicule_seul_TTC ;
 
                                 // On place les valeurs dans les cellules
                                 $array_datas[$i]['uniqueId'] = $bdc;
@@ -437,7 +451,7 @@
 
                                                     $immatriculation = str_replace("-", "", $immatriculation);
 
-                                                    $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
+                                                    $vehicule_seul_HT = $value_item->sellPriceWithoutTaxWithoutDiscount;
                                                     $vehicule_seul_TTC =  $value_item->sellPriceWithTax;
 
                                                     $nb_total_vehicules_selling++;
@@ -467,7 +481,7 @@
                                                 //immatriculation bon format
                                                 $immatriculation = str_replace("-", "", $immatriculation);
                                                 //prix du véhicule seul HT
-                                                $vehicule_seul_HT = $value_item->sellPriceWithoutTax;
+                                                $vehicule_seul_HT = $value_item->sellPriceWithoutTaxWithoutDiscount;
                                                 //prix du véhicule seul TTC
                                                 $vehicule_seul_TTC = $value_item->sellPriceWithTax;
 

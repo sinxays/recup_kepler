@@ -25,7 +25,7 @@ function goCurlToken($url)
 
 
 //FONCTIONS POUR RECUPERER LES BDC DE LA VEILLE
-function GoCurl_Recup_BDC($token, $url, $page, $num_bdc = '')
+function GoCurl_Recup_BDC($token, $url, $page, $num_bdc = '', $date_bdc = '')
 {
 
     $ch = curl_init();
@@ -58,7 +58,7 @@ function GoCurl_Recup_BDC($token, $url, $page, $num_bdc = '')
     //     'page' => $page
     // );
 
- 
+
 
     // choper un BC spécifique
     if (isset($num_bdc) && $num_bdc != '') {
@@ -71,14 +71,34 @@ function GoCurl_Recup_BDC($token, $url, $page, $num_bdc = '')
             "uniqueId" => $num_bdc,
             "page" => $page
         );
-    }else{
-        $dataArray = array(
-            "state" => 'administrative_selling.state.valid',
-            "orderFormDateFrom" => "2023-06-14",
-            "orderFormDateTo" => "2023-06-14",
-            "count" => 100,
-            "page" => $page
-        );
+    } else {
+
+        if (isset($date_bdc) && $date_bdc != '') {
+            $dataArray = array(
+                "state" => array(
+                    'administrative_selling.state.invoiced_edit',
+                    'administrative_selling.state.valid',
+                    'administrative_selling.state.invoiced',
+                ),
+                "orderFormDateFrom" => "$date_bdc",
+                "orderFormDateTo" => "$date_bdc",
+                "count" => 100,
+                "page" => $page
+            );
+        } else {
+            $date = date('Y-m-d', strtotime('first day of january this year'));
+            $dataArray = array(
+                "state" => array(
+                    'administrative_selling.state.invoiced_edit',
+                    'administrative_selling.state.valid',
+                    'administrative_selling.state.invoiced',
+                ),
+                "orderFormDateFrom" => "$date",
+                "updateDateFrom" => "$date",
+                "count" => 100,
+                "page" => $page
+            );
+        }
     }
 
 
@@ -135,7 +155,7 @@ function GoCurl_Recup_BDC($token, $url, $page, $num_bdc = '')
 }
 
 // FONCTION INFOS DU VEHICULES
-function getvehiculeInfo($reference, $token, $url_vehicule, $state)
+function getvehiculeInfo($reference, $token, $url_vehicule, $state, $state_vh = '')
 {
 
     $ch = curl_init();
@@ -145,7 +165,7 @@ function getvehiculeInfo($reference, $token, $url_vehicule, $state)
     $header[] = 'X-Auth-Token:' . $token;
     $header[] = 'Content-Type:text/html;charset=utf-8';
 
-    if ($state == 'arrivage_or_parc') {
+    if (isset($state_vh) && $state == 'arrivage_or_parc') {
         $dataArray = array(
             "reference" => $reference
         );
