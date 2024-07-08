@@ -2,7 +2,31 @@
 
 include("fonctions.php");
 
+
+$test_date = "2023/05/10";
+
+$final_date = date('d/m/Y',strtotime($test_date));
+var_dump($final_date);
+
+
+
+$bdc = get_bdc_from_uuid("2d058652-38aa-48f1-8d5f-e480894ed7b1");
+
+
 $time_pre = time();
+
+$test_string = '{"code":401,"message":"Invalid authentication token"}';
+
+$test_obj = json_decode($test_string);
+
+var_dump($test_obj);
+
+echo $test_obj->code;
+echo gettype($test_obj->code);
+
+sautdeligne();
+sautdeligne();
+
 
 
 function additionner($a, $b)
@@ -18,6 +42,7 @@ try // Nous allons essayer d'effectuer les instructions situées dans ce bloc.
 {
   echo additionner(12, 3), '<br />';
   echo additionner('azerty', 54), '<br />';
+  // si il trouve une erreur alors la suite ne s'execute pas
   echo additionner(4, 8);
 } catch (Exception $e) // Nous allons attraper les exceptions "Exception" s'il y en a une qui est levée.
 {
@@ -33,26 +58,8 @@ echo 'Fin du script'; // Ce message s'affiche, ça prouve bien que le script est
 
 sautdeligne();
 
+$test = recup_bdc(83259,'',1);
 
-$test = "Factur\u00e9 \u00e9dit\u00e9";
-
-
-// recup valeur token seulement
-for ($i = 0; $i < 10; $i++) {
-  $url = "https://www.kepler-soft.net/api/v3.0/auth-token/";
-  $valeur_token = goCurlToken($url);
-  echo $valeur_token. ' <br/>';
-}
-
-$time_post = time();
-
-$exec_time = $time_post - $time_pre;
-
-echo $exec_time.' <br/><br/>';
+var_dump($test);
 
 
-$time_post = time(); 
-
-echo $time_post.'<br/>';
-
-print_r(Utf8_ansi($test));

@@ -28,14 +28,16 @@
 
 
 
-    <span style="color:red"> <?php echo $valeur_token; ?> </span>
+    <span style="color:red">
+        <?php echo $valeur_token; ?>
+    </span>
 
     <?php
 
     echo "<h2>Récupération des données véhicule(s)</h2>";
 
     // recup données
-
+    
     $request_bon_de_commande = "v3.1/order-form/";
     $request_facture = "v3.1/invoice/";
     $request_vehicule = "v3.7/vehicles/";
@@ -45,87 +47,39 @@
     //$req_url = $url . "" . $request_bon_de_commande;
     $req_url = $url . "" . $request_vehicule;
     //$req_url = $url . "" . $request_vehicule;
-
+    
     sautdeligne();
 
     // $obj = GoCurl($valeur_token, $req_url);
-
-    $reference ='8fnm2wsxzj';
+    
+    $reference = '1dgcyoho';
     $state = '';
 
-    $obj = getvehiculeInfo($reference, $valeur_token, $req_url,$state);
+    $obj = getvehiculeInfo($reference, $valeur_token, $req_url, $state, FALSE);
 
-    // $obj = get_vehicules_veille($valeur_token,$req_url,false);
+    //si vide alors sans doute que le véhicule n'ets aps dispo à la vente
+    if (empty ($obj)) {
+        $result = getvehiculeInfo($reference, $valeur_token, $req_url, $state, TRUE);
+        $obj = $result;
+    }
 
-
-    $array_uniqueId = array();
-    $array_AcheteurName = array();
-    $array_prixHT = array();
-    $array_prixTTC = array();
-    $array_vendeurName = array();
-    $array_dateBC = array();
-
-
-    $array_datas = array();
-
-    // echo '<pre>' . var_dump($obj) . '<pre>';
-
-    $type_retour =  gettype($obj);
+    $type_retour = gettype($obj);
 
     var_dump($type_retour);
 
+    var_dump($obj);
 
+
+
+    // echo '<pre>' . var_dump($obj) . '<pre>';
     if ($type_retour == 'object') {
-
         // echo $obj->brand->reference;
         // echo gettype($obj_test);
-
-        var_dump($obj);
-
-
-        sautdeligne();
-        sautdeligne();
-
-        // echo 'toto';
-
-        sautdeligne();
-        sautdeligne();
-
-        // print_r($obj_test);
-
-        sautdeligne();
-        sautdeligne();
-
-        // echo 'toto2';
-
-        sautdeligne();
-        sautdeligne();
-
-        echo $obj->vin;
-
-
-        //echo gettype($obj);
-
-
-        sautdeligne();
-        sautdeligne();
     } else {
-        echo 'tata';
+        echo 'pas un objet';
     }
 
 
-
-
-
-    //array2csv($array_datas);
-
-
-
-    //echo $obj->datas[23]->items[2]->sellPriceWithoutTax;
-
-
-
-    //jsonToCSV($obj,"test.csv");
 
     /*************************************  FIN CODE MAIN ******************************************/
 

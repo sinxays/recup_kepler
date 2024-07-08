@@ -73,7 +73,7 @@
     while ($datas_find == true) {
 
         //recupere la requete !!!!
-        $obj = GoCurl($valeur_token, $req_url_BC, $j);
+        $obj = GoCurl_Facture_edite($valeur_token, $req_url_BC, $j);
         $obj_final = $obj->datas;
 
         if (!empty($obj_final)) {
@@ -212,11 +212,9 @@
     // print_r($array_datas);
 
 
-    // array2csv($array_datas);
-
     $writer = new XLSXWriter();
     $writer->writeSheet($array_datas);
-    $writer->writeToFile('test_xlsx_BDC_test.xlsx');
+    $writer->writeToFile('test_FACTURES_FACTUREES_EDIT.xlsx');
 
 
 
@@ -226,140 +224,6 @@
 
 
 
-
-
-
-    /************************************************  FONCTIONS *****************************************************/
-
-    //fonction pour récupérer le token avec la clé API
-    function goCurlToken($url)
-    {
-        $ch2 = curl_init();
-
-        $header = array();
-
-        curl_setopt($ch2, CURLOPT_URL, $url);
-        curl_setopt($ch2, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch2, CURLOPT_POST, true);
-        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch2, CURLOPT_POSTFIELDS, "apiKey=54c4fbe3ee0ed3683a17488371d5e762b9c5f4db6a7bc0507d3518c40bedfe300fbece014e3eac21acd380a142e874c460931659fe922bc1ef170d1f325e499c");
-
-        $result = curl_exec($ch2);
-
-        curl_close($ch2);
-
-        $data = json_decode($result, true);
-
-        return $data['value'];
-    }
-
-
-    //fonction pour récupérer les données
-    function GoCurl($token, $url, $page)
-    {
-
-        $ch = curl_init();
-
-        // le token
-        //$token = '7MLGvf689hlSPeWXYGwZUi\/t2mpcKrvVr\/fKORXMc+9BFxmYPqq4vOZtcRjVes9DBLM=';
-        $header = array();
-        $header[] = 'X-Auth-Token:' . $token;
-        $header[] = 'Content-Type:text/html;charset=utf-8';
-
-        // le ou les parametres de l'url
-        $dataArray = array(
-            "state" => 'administrative_selling.state.valid',
-            "updateDateFrom" => "2022-12-01",
-            "count" => "100",
-            "page" => $page
-        );
-
-        // $dataArray = array(
-        //     "state" => 'administrative_selling.state.already_sold',
-        //     "updateDateFrom" => "2020-09-01",
-        //     "count" => 100,
-        //     "page" => $page
-        // );
-
-        // choper un BC spécifique
-        // $dataArray = array(
-        //     "orderFormNumber" => "70670",
-        //     "page" => $page
-        // );
-
-
-        $data = http_build_query($dataArray);
-
-        $getURL = $url. '?' . $data;
-
-        print_r($getURL);
-
-        sautdeligne();
-
-        curl_setopt($ch, CURLOPT_URL, $getURL);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-
-        $result = curl_exec($ch);
-
-        if (curl_error($ch)) {
-            $result = curl_error($ch);
-            print_r($result);
-            echo "<br/> erreur";
-        }
-
-        curl_close($ch);
-
-        $obj = json_decode($result);
-
-        echo '<pre>' . print_r($result) . '</pre>';
-
-        return $obj;
-    }
-
-
-
-    // json to CSV
-    function array2csv($data, $delimiter = ';', $enclosure = '"', $escape_char = "\\")
-    {
-        $f = fopen('test_datas_bdc.csv', 'wr+');
-        $entete[] = ["N° Bon Commande", "Immatriculation", "RS/Nom Acheteur", "Prix Vente HT", "Prix de vente TTC", "Vendeur Vente", "date du dernier BC", "Destination de sortie", "VIN"];
-
-        //entete
-        foreach ($entete as $item) {
-            fputcsv($f, $item, $delimiter, $enclosure, $escape_char);
-        }
-
-        foreach ($data as $item) {
-            fputcsv($f, $item, $delimiter, $enclosure, $escape_char);
-        }
-        rewind($f);
-        return stream_get_contents($f);
-    }
-
-
-    //récupérer juste la valeur du token
-    function recup_token_value($chaine)
-    {
-        $try = explode(",", $chaine);
-
-        $try2 = explode(":", $try[0]);
-
-        $try3 = str_replace("\"", "", $try2[1]);
-
-        return $try3;
-    }
-
-
-
-    function sautdeligne()
-    {
-        echo "<br/>";
-        echo "<br/>";
-    }
 
     ?>
 
