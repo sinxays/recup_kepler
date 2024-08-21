@@ -13,6 +13,7 @@ if (isset($_POST)) {
             $return_bdc = recup_bdc($_POST['numero_bdc'], $_POST['date_bdc'], $page);
             if (!empty($return_bdc)) {
                 // décommenter ci dessous pour voir l'objet final
+                // var_dump($return_bdc);
                 $result_final = mise_en_forme_result("bdc", $return_bdc);
             } else {
                 $result_final = "Pas de résultat";
@@ -29,6 +30,8 @@ if (isset($_POST)) {
             $result_facture = recup_facture($_POST['num_facture'], $_POST['date_factures'], $page);
 
             if (!empty($result_facture)) {
+                 // décommenter ci dessous pour voir l'objet final
+                // var_dump($result_facture);
                 $result_final = mise_en_forme_result("facture", $result_facture);
             } else {
                 $result_final = "Pas de résultat";
