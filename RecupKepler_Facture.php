@@ -188,18 +188,16 @@
 
 
                             //si Guillaume et Humberto alors CVO SIEGE
-                            if ($nom_vendeur == "GUILLAUME HONNERT" || $nom_vendeur == "HUMBERTO ALVES") {
-                                $parc = "CVO SIEGE";
-                            }
-
-
+                            // if ($nom_vendeur == "GUILLAUME HONNERT" || $nom_vendeur == "HUMBERTO ALVES") {
+                            //     $parc = "CVO SIEGE";
+                            // }
                             switch ($nom_vendeur) {
-                                case 'GUILLAUME HONNERT':
-                                case 'HUMBERTO ALVES':
+                                case "GUILLAUME HONNERT":
+                                case "HUMBERTO ALVES":
                                     $parc = "CVO SIEGE";
                                     break;
 
-                                case 'Jean-Philippe Thomas':
+                                case "Jean-Philippe Thomas":
                                     $parc = "CVO THOMAS";
                                     break;
 
