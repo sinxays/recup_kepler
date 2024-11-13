@@ -167,7 +167,7 @@
                             $state_vh = '';
 
                             //  recup infos du véhicule
-                            $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule,$state_vh, false);
+                            $obj_result = getvehiculeInfo($reference_item, $valeur_token, $req_url_vehicule, $state_vh, false);
 
                             $obj_vehicule = $obj_result;
 
@@ -192,6 +192,21 @@
                                 $parc = "CVO SIEGE";
                             }
 
+
+                            switch ($nom_vendeur) {
+                                case 'GUILLAUME HONNERT':
+                                case 'HUMBERTO ALVES':
+                                    $parc = "CVO SIEGE";
+                                    break;
+
+                                case 'Jean-Philippe Thomas':
+                                    $parc = "CVO THOMAS";
+                                    break;
+
+                                default:
+                                    $parc = 'CVO';
+                                    break;
+                            }
 
                             $array_datas[$i]['date_facture'] = $date_facture;
                             $array_datas[$i]['immatriculation'] = $immatriculation;
